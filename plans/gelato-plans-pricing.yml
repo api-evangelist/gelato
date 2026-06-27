@@ -1,0 +1,148 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Gelato
+providerId: gelato
+created: '2026-06-25'
+modified: '2026-06-25'
+reconciled: false
+tags:
+- Print on Demand
+- Ecommerce
+- Fulfillment
+- Distributed Production
+- Plans
+description: >-
+  Gelato does not charge an API access fee or commission. The print-on-demand
+  service is free to use; you pay per order for product production plus
+  shipping, charged separately. Gelato+ subscription tiers (Gelato+, Gelato+
+  Gold, and an enterprise Platinum tier) layer product discounts, additional
+  connected stores, more user accounts, and premium tooling on top of the
+  usage-based per-order cost. Pricing varies by product, country, and
+  production facility.
+notes: >-
+  Per-product production and shipping prices are returned at runtime by the
+  Product Prices and Orders Quote endpoints and vary by product, quantity,
+  country, and currency. Subscription prices below are as published on the
+  Gelato pricing and subscription pages and should be verified on
+  reconciliation.
+sources:
+- https://www.gelato.com/pricing
+- https://www.gelato.com/subscription-plans
+- https://support.gelato.com/en/articles/8996313-how-much-does-gelato-subscription-cost
+- https://dashboard.gelato.com/docs/
+plans:
+- id: gelato-free
+  name: Free
+  type: usage
+  description: >-
+    Free to use with no monthly fee and no commission. API access is
+    included. You pay only the per-order product production and shipping
+    cost when a customer buys a product.
+  entries:
+  - label: API Access
+    name: api_access
+    type: flat
+    metric: access
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: free, no API fee
+    userMultiplied: false
+  - label: Product Production
+    name: product_production
+    type: usage
+    metric: orders
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: per-product price varies by product, quantity, and country
+    userMultiplied: false
+  - label: Shipping
+    name: shipping
+    type: usage
+    metric: shipments
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: per-shipment cost varies by destination and shipment method
+    userMultiplied: false
+  elements:
+  - name: Orders API
+  - name: Product Catalog API
+  - name: Prices and Stock API
+  - name: Shipment API
+  - name: Ecommerce API
+  - name: Webhooks
+- id: gelato-plus
+  name: Gelato+
+  type: subscription
+  description: >-
+    Paid membership adding product discounts (up to ~25-35% off), unlimited
+    stores, premium mockups, AI tooling, and branded packaging options.
+  entries:
+  - label: Gelato+ Membership
+    name: gelato_plus
+    type: flat
+    metric: subscription
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $23.99/month or $19.99/month billed annually
+    userMultiplied: false
+  elements:
+  - name: Product Discounts
+  - name: Unlimited Stores
+  - name: Premium Mockups
+  - name: AI Tools
+  - name: Branded Packaging
+- id: gelato-plus-gold
+  name: Gelato+ Gold
+  type: subscription
+  description: >-
+    Higher membership tier with deeper universal discounts and higher limits
+    on connected stores and user accounts for growing businesses.
+  entries:
+  - label: Gelato+ Gold Membership
+    name: gelato_plus_gold
+    type: flat
+    metric: subscription
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $129/month (or approx. $1,285/year)
+    userMultiplied: false
+  elements:
+  - name: Universal Product Discount
+  - name: Up to 25 Connected Stores
+  - name: Up to 20 User Accounts
+- id: gelato-platinum
+  name: Platinum
+  type: enterprise
+  description: >-
+    Enterprise tier with bespoke discounts beyond the standard membership
+    cap, a dedicated account manager, and concierge support for
+    high-volume sellers and agencies. Custom pricing.
+  entries:
+  - label: Platinum Agreement
+    name: platinum
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Bespoke Discounts
+  - name: Dedicated Account Manager
+  - name: Concierge Support
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

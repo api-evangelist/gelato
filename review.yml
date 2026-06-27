@@ -1,0 +1,89 @@
+aid: gelato
+name: Gelato
+review:
+  question: Does Gelato expose a documented public WebSocket API?
+  answer: false
+  date: '2026-06-25'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was created. Gelato's asynchronous, event-driven
+    surface is delivered as outbound HTTP webhooks (JSON POSTed to a
+    subscriber URL), not as a streaming protocol. Webhooks are modeled as a
+    REST callback surface in apis.yml and the OpenAPI document rather than
+    via AsyncAPI; no WebSocket or SSE transport is documented.
+findings:
+  summary: |
+    Gelato does not publish a documented public WebSocket API. The Gelato
+    platform exposes only REST (HTTPS) endpoints across dedicated subdomains:
+    order.gelatoapis.com (Orders v4), product.gelatoapis.com (Product Catalog
+    v3 plus prices and stock), shipment.gelatoapis.com (Shipment v1), and
+    ecommerce.gelatoapis.com (Ecommerce v1). All requests are authenticated
+    with an X-API-KEY header over HTTPS. Asynchronous notifications are
+    delivered via outbound webhooks (HTTP callbacks), not over a WebSocket or
+    Server-Sent Events stream. No realtime bidirectional ws:// or wss://
+    endpoint is documented.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://order.gelatoapis.com
+      documented: true
+    - protocol: REST
+      scheme: https
+      baseURL: https://product.gelatoapis.com
+      documented: true
+    - protocol: REST
+      scheme: https
+      baseURL: https://shipment.gelatoapis.com
+      documented: true
+    - protocol: REST
+      scheme: https
+      baseURL: https://ecommerce.gelatoapis.com
+      documented: true
+    - protocol: Webhook
+      scheme: https
+      note: Outbound HTTP callbacks (JSON) for order and store-product events; not WebSocket.
+      documented: true
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented anywhere in Gelato's API reference as of the review date.
+  endpointsConfirmedRest:
+    - POST   https://order.gelatoapis.com/v4/orders
+    - POST   https://order.gelatoapis.com/v4/orders:search
+    - POST   https://order.gelatoapis.com/v4/orders:quote
+    - GET    https://order.gelatoapis.com/v4/orders/{orderId}
+    - PATCH  https://order.gelatoapis.com/v4/orders/{orderId}
+    - POST   https://order.gelatoapis.com/v4/orders/{orderId}:cancel
+    - GET    https://product.gelatoapis.com/v3/catalogs
+    - GET    https://product.gelatoapis.com/v3/catalogs/{catalogUid}
+    - POST   https://product.gelatoapis.com/v3/catalogs/{catalogUid}/products:search
+    - GET    https://product.gelatoapis.com/v3/products/{productUid}
+    - GET    https://product.gelatoapis.com/v3/products/{productUid}/cover-dimensions
+    - GET    https://product.gelatoapis.com/v3/products/{productUid}/prices
+    - POST   https://product.gelatoapis.com/v3/stock/region-availability
+    - GET    https://shipment.gelatoapis.com/v1/shipment-methods
+    - GET    https://ecommerce.gelatoapis.com/v1/stores/{storeId}/products
+    - GET    https://ecommerce.gelatoapis.com/v1/stores/{storeId}/products/{productId}
+    - POST   https://ecommerce.gelatoapis.com/v1/stores/{storeId}/products:create-from-template
+    - GET    https://ecommerce.gelatoapis.com/v1/templates/{templateId}
+sources:
+  - url: https://dashboard.gelato.com/docs/
+    type: Documentation
+    note: API overview lists REST subdomains and X-API-KEY auth; no WebSocket mentioned.
+  - url: https://dashboard.gelato.com/docs/orders/v4/create/
+    type: APIReference
+    note: Orders v4 endpoints are HTTPS REST under order.gelatoapis.com.
+  - url: https://dashboard.gelato.com/docs/products/catalog/list/
+    type: APIReference
+    note: Product Catalog v3 endpoints are HTTPS REST under product.gelatoapis.com.
+  - url: https://dashboard.gelato.com/docs/webhooks/
+    type: Documentation
+    note: Asynchronous events are delivered as outbound HTTP webhooks, not WebSocket.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists. Gelato's event-driven surface is
+    outbound HTTP webhooks, which are represented as a REST/callback API in
+    apis.yml; no AsyncAPI or WebSocket artifact was created.

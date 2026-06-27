@@ -1,0 +1,100 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Gelato
+providerId: gelato
+created: '2026-06-25'
+modified: '2026-06-25'
+reconciled: false
+tags:
+- Print on Demand
+- Ecommerce
+- Fulfillment
+- Distributed Production
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Gelato spend. Gelato charges no API fee or commission; cost
+  is driven per order by product production plus shipping, billed separately
+  and varying by product, quantity, country, and production facility.
+  Optional Gelato+ / Gelato+ Gold / Platinum subscriptions are flat
+  recurring fees that unlock product discounts which directly lower the
+  per-order production cost.
+notes: >-
+  Per-product and shipping rates are dynamic and returned by the Product
+  Prices and Orders Quote endpoints; verify current rates and subscription
+  prices against the Gelato pricing pages during reconciliation.
+sources:
+- https://www.gelato.com/pricing
+- https://www.gelato.com/subscription-plans
+- https://dashboard.gelato.com/docs/
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Gelato
+serviceCategory: Print on Demand and Fulfillment
+billingModel:
+  pricingCategory: Usage-Based
+  billingFrequency: Per Order
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Purchase
+  - Adjustment
+focusColumns:
+  ServiceName: Gelato API
+  ServiceCategory: Print on Demand and Fulfillment
+  ProviderName: Gelato
+  PublisherName: Gelato
+  InvoiceIssuerName: Gelato
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  PricingCategory: Usage-Based
+meters:
+- name: product_production
+  description: Per-product production cost, varying by product, quantity, and country.
+  unit: items
+  aggregation: sum
+  dimensions:
+  - account
+  - product
+  - country
+- name: shipping
+  description: Per-shipment cost, varying by destination country and shipment method.
+  unit: shipments
+  aggregation: sum
+  dimensions:
+  - account
+  - country
+  - shipmentMethod
+- name: subscription_fee
+  description: Recurring Gelato+ / Gelato+ Gold membership fee.
+  unit: subscriptions
+  aggregation: sum
+  dimensions:
+  - account
+  - tier
+- name: product_discount
+  description: Discount applied to production cost from an active subscription tier.
+  unit: currency
+  aggregation: sum
+  dimensions:
+  - account
+  - tier
+principles:
+- name: Visibility
+  description: Pull order-level cost from order details and reconcile production plus shipping per order.
+- name: Allocation
+  description: Tag orders with orderReferenceId and customerReferenceId to map fulfillment cost to stores and customers.
+- name: Optimization
+  description: Use a Gelato+ tier when discounts exceed the subscription fee; quote orders to pick lower-cost shipment methods and local production regions.
+- name: Accountability
+  description: Review per-store and per-product fulfillment margins monthly against revenue.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,61 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Gelato
+providerId: gelato
+created: '2026-06-25'
+modified: '2026-06-25'
+reconciled: false
+tags:
+- Print on Demand
+- Ecommerce
+- Fulfillment
+- Distributed Production
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  The Gelato API is authenticated per account with an X-API-KEY and is
+  served over HTTPS across the order, product, shipment, and ecommerce
+  subdomains. Gelato applies request throttling to protect its platform,
+  but specific per-endpoint request-per-minute or per-day limits are not
+  published in the public API documentation and are not reconciled in this
+  artifact.
+notes: >-
+  Confirm any per-endpoint throttling thresholds and the throttled response
+  code directly with Gelato (developer support or account team) on
+  reconciliation; public docs do not enumerate numeric rate limits.
+sources:
+- https://dashboard.gelato.com/docs/get-started/
+- https://dashboard.gelato.com/docs/
+responseCodes:
+  throttled: 429
+limits:
+- name: Per-Account Requests
+  scope: account
+  metric: requests
+  limit: see provider documentation
+  notes: Throttling is applied per API key; numeric thresholds are not publicly documented.
+- name: Orders API
+  scope: account
+  metric: requests
+  limit: see provider documentation
+  notes: Applies to order.gelatoapis.com create, search, quote, get, patch, and cancel.
+- name: Product Catalog and Prices/Stock API
+  scope: account
+  metric: requests
+  limit: see provider documentation
+  notes: Applies to product.gelatoapis.com catalog, product, prices, and stock endpoints.
+- name: Ecommerce API
+  scope: account
+  metric: requests
+  limit: see provider documentation
+  notes: Applies to ecommerce.gelatoapis.com store product and template endpoints.
+policies:
+- name: HTTPS Required
+  description: All API requests must be made over HTTPS; plain HTTP calls fail.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor Retry-After on 429 responses.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

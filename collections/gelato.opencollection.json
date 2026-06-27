@@ -1,0 +1,283 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gelato API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-KEY",
+      "value": "{{apiKey}}",
+      "in": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://order.gelatoapis.com/v4/orders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new order for fulfillment."
+        },
+        {
+          "info": {
+            "name": "Search orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://order.gelatoapis.com/v4/orders:search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Searches orders by channel, country, status, type, and date range."
+        },
+        {
+          "info": {
+            "name": "Quote order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://order.gelatoapis.com/v4/orders:quote",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns quotes including shipment methods and prices before ordering."
+        },
+        {
+          "info": {
+            "name": "Get order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://order.gelatoapis.com/v4/orders/{{orderId}}"
+          },
+          "docs": "Retrieves a single order by its Gelato order id."
+        },
+        {
+          "info": {
+            "name": "Patch draft order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://order.gelatoapis.com/v4/orders/{{orderId}}",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Converts a draft order into a regular order."
+        },
+        {
+          "info": {
+            "name": "Cancel order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://order.gelatoapis.com/v4/orders/{{orderId}}:cancel"
+          },
+          "docs": "Cancels an order before it moves into production."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Product Catalog",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List catalogs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://product.gelatoapis.com/v3/catalogs"
+          },
+          "docs": "Returns the list of available product catalogs."
+        },
+        {
+          "info": {
+            "name": "Get catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://product.gelatoapis.com/v3/catalogs/{{catalogUid}}"
+          },
+          "docs": "Returns a single catalog with product attributes and values."
+        },
+        {
+          "info": {
+            "name": "Search products",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://product.gelatoapis.com/v3/catalogs/{{catalogUid}}/products:search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Searches products within a catalog by attribute filters."
+        },
+        {
+          "info": {
+            "name": "Get product",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://product.gelatoapis.com/v3/products/{{productUid}}"
+          },
+          "docs": "Returns the details of a single product."
+        },
+        {
+          "info": {
+            "name": "Cover dimensions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://product.gelatoapis.com/v3/products/{{productUid}}/cover-dimensions"
+          },
+          "docs": "Returns the cover dimensions for a multi-page product."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Prices and Stock",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Price",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://product.gelatoapis.com/v3/products/{{productUid}}/prices"
+          },
+          "docs": "Returns prices for all quantities of a product."
+        },
+        {
+          "info": {
+            "name": "Stock availability",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://product.gelatoapis.com/v3/stock/region-availability",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns regional stock availability for stock-able products."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Shipment",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Shipment methods",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://shipment.gelatoapis.com/v1/shipment-methods"
+          },
+          "docs": "Returns shipment methods, optionally filtered by destination country."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Ecommerce",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List products",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ecommerce.gelatoapis.com/v1/stores/{{storeId}}/products"
+          },
+          "docs": "Returns a paginated list of products in a connected store."
+        },
+        {
+          "info": {
+            "name": "Get product",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ecommerce.gelatoapis.com/v1/stores/{{storeId}}/products/{{productId}}"
+          },
+          "docs": "Returns a single product from a connected store."
+        },
+        {
+          "info": {
+            "name": "Create product from template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ecommerce.gelatoapis.com/v1/stores/{{storeId}}/products:create-from-template",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a store product from an existing template."
+        },
+        {
+          "info": {
+            "name": "Get template",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ecommerce.gelatoapis.com/v1/templates/{{templateId}}"
+          },
+          "docs": "Returns the details of a product template."
+        }
+      ]
+    }
+  ]
+}

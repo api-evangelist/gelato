@@ -1,0 +1,284 @@
+{
+  "info": {
+    "name": "Gelato API",
+    "description": {
+      "content": "REST collection for the Gelato print-on-demand API across the order, product, shipment, and ecommerce subdomains. Authenticated with an X-API-KEY header over HTTPS.",
+      "type": "text/plain"
+    },
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      { "key": "key", "value": "X-API-KEY", "type": "string" },
+      { "key": "value", "value": "{{apiKey}}", "type": "string" },
+      { "key": "in", "value": "header", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "apiKey", "value": "" },
+    { "key": "orderId", "value": "" },
+    { "key": "catalogUid", "value": "" },
+    { "key": "productUid", "value": "" },
+    { "key": "storeId", "value": "" },
+    { "key": "productId", "value": "" },
+    { "key": "templateId", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Orders",
+      "item": [
+        {
+          "name": "Create order",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": {
+              "raw": "https://order.gelatoapis.com/v4/orders",
+              "protocol": "https",
+              "host": ["order", "gelatoapis", "com"],
+              "path": ["v4", "orders"]
+            },
+            "body": { "mode": "raw", "raw": "{\n  \"orderType\": \"order\",\n  \"orderReferenceId\": \"\",\n  \"customerReferenceId\": \"\",\n  \"currency\": \"USD\",\n  \"items\": [],\n  \"shippingAddress\": {}\n}", "options": { "raw": { "language": "json" } } }
+          }
+        },
+        {
+          "name": "Search orders",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": {
+              "raw": "https://order.gelatoapis.com/v4/orders:search",
+              "protocol": "https",
+              "host": ["order", "gelatoapis", "com"],
+              "path": ["v4", "orders:search"]
+            },
+            "body": { "mode": "raw", "raw": "{\n  \"orderTypes\": [\"order\"],\n  \"limit\": 50,\n  \"offset\": 0\n}", "options": { "raw": { "language": "json" } } }
+          }
+        },
+        {
+          "name": "Quote order",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": {
+              "raw": "https://order.gelatoapis.com/v4/orders:quote",
+              "protocol": "https",
+              "host": ["order", "gelatoapis", "com"],
+              "path": ["v4", "orders:quote"]
+            },
+            "body": { "mode": "raw", "raw": "{\n  \"orderReferenceId\": \"\",\n  \"customerReferenceId\": \"\",\n  \"recipient\": {},\n  \"products\": []\n}", "options": { "raw": { "language": "json" } } }
+          }
+        },
+        {
+          "name": "Get order",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "https://order.gelatoapis.com/v4/orders/{{orderId}}",
+              "protocol": "https",
+              "host": ["order", "gelatoapis", "com"],
+              "path": ["v4", "orders", "{{orderId}}"]
+            }
+          }
+        },
+        {
+          "name": "Patch draft order",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": {
+              "raw": "https://order.gelatoapis.com/v4/orders/{{orderId}}",
+              "protocol": "https",
+              "host": ["order", "gelatoapis", "com"],
+              "path": ["v4", "orders", "{{orderId}}"]
+            },
+            "body": { "mode": "raw", "raw": "{\n  \"orderType\": \"order\"\n}", "options": { "raw": { "language": "json" } } }
+          }
+        },
+        {
+          "name": "Cancel order",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "https://order.gelatoapis.com/v4/orders/{{orderId}}:cancel",
+              "protocol": "https",
+              "host": ["order", "gelatoapis", "com"],
+              "path": ["v4", "orders", "{{orderId}}:cancel"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Product Catalog",
+      "item": [
+        {
+          "name": "List catalogs",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "https://product.gelatoapis.com/v3/catalogs",
+              "protocol": "https",
+              "host": ["product", "gelatoapis", "com"],
+              "path": ["v3", "catalogs"]
+            }
+          }
+        },
+        {
+          "name": "Get catalog",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "https://product.gelatoapis.com/v3/catalogs/{{catalogUid}}",
+              "protocol": "https",
+              "host": ["product", "gelatoapis", "com"],
+              "path": ["v3", "catalogs", "{{catalogUid}}"]
+            }
+          }
+        },
+        {
+          "name": "Search products",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": {
+              "raw": "https://product.gelatoapis.com/v3/catalogs/{{catalogUid}}/products:search",
+              "protocol": "https",
+              "host": ["product", "gelatoapis", "com"],
+              "path": ["v3", "catalogs", "{{catalogUid}}", "products:search"]
+            },
+            "body": { "mode": "raw", "raw": "{\n  \"attributeFilters\": {},\n  \"limit\": 50,\n  \"offset\": 0\n}", "options": { "raw": { "language": "json" } } }
+          }
+        },
+        {
+          "name": "Get product",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "https://product.gelatoapis.com/v3/products/{{productUid}}",
+              "protocol": "https",
+              "host": ["product", "gelatoapis", "com"],
+              "path": ["v3", "products", "{{productUid}}"]
+            }
+          }
+        },
+        {
+          "name": "Cover dimensions",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "https://product.gelatoapis.com/v3/products/{{productUid}}/cover-dimensions",
+              "protocol": "https",
+              "host": ["product", "gelatoapis", "com"],
+              "path": ["v3", "products", "{{productUid}}", "cover-dimensions"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Prices and Stock",
+      "item": [
+        {
+          "name": "Price",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "https://product.gelatoapis.com/v3/products/{{productUid}}/prices",
+              "protocol": "https",
+              "host": ["product", "gelatoapis", "com"],
+              "path": ["v3", "products", "{{productUid}}", "prices"]
+            }
+          }
+        },
+        {
+          "name": "Stock availability",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": {
+              "raw": "https://product.gelatoapis.com/v3/stock/region-availability",
+              "protocol": "https",
+              "host": ["product", "gelatoapis", "com"],
+              "path": ["v3", "stock", "region-availability"]
+            },
+            "body": { "mode": "raw", "raw": "{\n  \"products\": []\n}", "options": { "raw": { "language": "json" } } }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Shipment",
+      "item": [
+        {
+          "name": "Shipment methods",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "https://shipment.gelatoapis.com/v1/shipment-methods",
+              "protocol": "https",
+              "host": ["shipment", "gelatoapis", "com"],
+              "path": ["v1", "shipment-methods"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Ecommerce",
+      "item": [
+        {
+          "name": "List products",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "https://ecommerce.gelatoapis.com/v1/stores/{{storeId}}/products",
+              "protocol": "https",
+              "host": ["ecommerce", "gelatoapis", "com"],
+              "path": ["v1", "stores", "{{storeId}}", "products"]
+            }
+          }
+        },
+        {
+          "name": "Get product",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "https://ecommerce.gelatoapis.com/v1/stores/{{storeId}}/products/{{productId}}",
+              "protocol": "https",
+              "host": ["ecommerce", "gelatoapis", "com"],
+              "path": ["v1", "stores", "{{storeId}}", "products", "{{productId}}"]
+            }
+          }
+        },
+        {
+          "name": "Create product from template",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": {
+              "raw": "https://ecommerce.gelatoapis.com/v1/stores/{{storeId}}/products:create-from-template",
+              "protocol": "https",
+              "host": ["ecommerce", "gelatoapis", "com"],
+              "path": ["v1", "stores", "{{storeId}}", "products:create-from-template"]
+            },
+            "body": { "mode": "raw", "raw": "{\n  \"templateId\": \"\",\n  \"title\": \"\",\n  \"description\": \"\"\n}", "options": { "raw": { "language": "json" } } }
+          }
+        },
+        {
+          "name": "Get template",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "https://ecommerce.gelatoapis.com/v1/templates/{{templateId}}",
+              "protocol": "https",
+              "host": ["ecommerce", "gelatoapis", "com"],
+              "path": ["v1", "templates", "{{templateId}}"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

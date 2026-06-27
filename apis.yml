@@ -1,0 +1,151 @@
+aid: gelato
+url: https://raw.githubusercontent.com/api-evangelist/gelato/refs/heads/main/apis.yml
+name: Gelato
+kind: company
+description: Gelato operates a global, distributed print-on-demand production network
+  that lets ecommerce sellers produce and ship products locally in 30+ countries.
+  The Gelato API exposes REST endpoints across dedicated subdomains for orders,
+  the product catalog, pricing and stock, shipment methods, ecommerce store
+  products and templates, plus webhooks - all authenticated with an X-API-KEY header.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Print on Demand
+- Ecommerce
+- Fulfillment
+- Distributed Production
+- Orders
+created: '2026-06-25'
+modified: '2026-06-25'
+specificationVersion: '0.19'
+apis:
+- aid: gelato:gelato-orders-api
+  name: Gelato Orders API
+  tags:
+  - Orders
+  - Fulfillment
+  - Print on Demand
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://dashboard.gelato.com/docs/orders/
+  baseURL: https://order.gelatoapis.com
+  properties:
+  - url: https://dashboard.gelato.com/docs/orders/
+    type: Documentation
+  - url: https://dashboard.gelato.com/docs/orders/v4/create/
+    type: APIReference
+  - url: openapi/gelato-openapi.yml
+    type: OpenAPI
+  description: Create, retrieve, search, patch (draft to order), quote, and cancel
+    print-on-demand orders for fulfillment through Gelato's global production network,
+    using the v4 Orders endpoints under order.gelatoapis.com.
+- aid: gelato:gelato-product-catalog-api
+  name: Gelato Product Catalog API
+  tags:
+  - Product Catalog
+  - Catalogs
+  - Products
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://dashboard.gelato.com/docs/products/
+  baseURL: https://product.gelatoapis.com
+  properties:
+  - url: https://dashboard.gelato.com/docs/products/
+    type: Documentation
+  - url: https://dashboard.gelato.com/docs/products/catalog/list/
+    type: APIReference
+  - url: openapi/gelato-openapi.yml
+    type: OpenAPI
+  description: List and retrieve product catalogs, search products within a catalog,
+    and fetch individual product and cover-dimension details from the v3 Product
+    Catalog endpoints under product.gelatoapis.com.
+- aid: gelato:gelato-prices-stock-api
+  name: Gelato Prices and Stock API
+  tags:
+  - Prices
+  - Stock
+  - Availability
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://dashboard.gelato.com/docs/products/prices/
+  baseURL: https://product.gelatoapis.com
+  properties:
+  - url: https://dashboard.gelato.com/docs/products/prices/
+    type: Documentation
+  - url: https://dashboard.gelato.com/docs/products/stock/region-availability/
+    type: APIReference
+  - url: openapi/gelato-openapi.yml
+    type: OpenAPI
+  description: Retrieve quantity-based prices for a product and check regional stock
+    availability for stock-able products via the v3 prices and stock endpoints under
+    product.gelatoapis.com.
+- aid: gelato:gelato-shipment-api
+  name: Gelato Shipment API
+  tags:
+  - Shipment
+  - Shipping Methods
+  - Logistics
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://dashboard.gelato.com/docs/shipment/methods/
+  baseURL: https://shipment.gelatoapis.com
+  properties:
+  - url: https://dashboard.gelato.com/docs/shipment/methods/
+    type: Documentation
+  - url: https://dashboard.gelato.com/docs/shipment/methods/
+    type: APIReference
+  - url: openapi/gelato-openapi.yml
+    type: OpenAPI
+  description: List the shipment methods Gelato provides - with type, tracking
+    support, and supported countries - optionally filtered by destination country,
+    via the v1 shipment endpoint under shipment.gelatoapis.com.
+- aid: gelato:gelato-ecommerce-api
+  name: Gelato Ecommerce API
+  tags:
+  - Ecommerce
+  - Stores
+  - Templates
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://dashboard.gelato.com/docs/ecommerce/products/list/
+  baseURL: https://ecommerce.gelatoapis.com
+  properties:
+  - url: https://dashboard.gelato.com/docs/ecommerce/products/list/
+    type: Documentation
+  - url: https://dashboard.gelato.com/docs/ecommerce/products/create-from-template/
+    type: APIReference
+  - url: openapi/gelato-openapi.yml
+    type: OpenAPI
+  description: Manage connected store products and templates - list and get store
+    products, create products from a template, and retrieve template details - via
+    the v1 ecommerce endpoints under ecommerce.gelatoapis.com.
+- aid: gelato:gelato-webhooks-api
+  name: Gelato Webhooks API
+  tags:
+  - Webhooks
+  - Events
+  - Notifications
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://dashboard.gelato.com/docs/webhooks/
+  baseURL: https://dashboard.gelato.com/docs
+  properties:
+  - url: https://dashboard.gelato.com/docs/webhooks/
+    type: Documentation
+  - url: https://dashboard.gelato.com/docs/webhooks/
+    type: APIReference
+  - url: openapi/gelato-openapi.yml
+    type: OpenAPI
+  description: Subscribe to JSON event callbacks for order and store-product
+    lifecycle changes - including order_status_updated, order_item_status_updated,
+    and store_product_template_created/updated/deleted events posted to your
+    endpoint URL.
+common:
+- type: LinkedIn
+  url: https://www.linkedin.com/company/gelato-com
+- type: Website
+  url: https://www.gelato.com
+- type: Documentation
+  url: https://dashboard.gelato.com/docs/
+- type: Plans
+  url: plans/gelato-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/gelato-rate-limits.yml
+- type: FinOps
+  url: finops/gelato-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
