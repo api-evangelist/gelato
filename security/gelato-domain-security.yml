@@ -1,0 +1,46 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.gelato.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 29 17:57:51 2026 GMT
+  hsts: true
+  hsts_max_age: 15768000
+- host: dashboard.gelato.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Aug 29 08:44:52 2026 GMT
+  hsts: true
+  hsts_max_age: 15768000
+- host: order.gelatoapis.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 10 03:50:46 2026 GMT
+  hsts: null
+domains:
+- domain: gelato.com
+  dnssec: false
+  caa:
+  - 0 issue "amazonaws.com"
+  - 0 issue "digicert.com; cansignhttpexchanges=yes"
+  - 0 issue "letsencrypt.org"
+  - 0 issue "pki.goog; cansignhttpexchanges=yes"
+  - 0 issue "sectigo.com"
+  - 0 issuewild "amazonaws.com"
+  spf: true
+  dmarc: true
+  dmarc_policy: none
+- domain: gelatoapis.com
+  dnssec: false
+  caa:
+  - 0 issuewild "digicert.com; cansignhttpexchanges=yes"
+  - 0 issuewild "letsencrypt.org"
+  - 0 issuewild "pki.goog; cansignhttpexchanges=yes"
+  - 0 issuewild "sectigo.com"
+  - 0 issue "amazonaws.com"
+  - 0 issue "digicert.com; cansignhttpexchanges=yes"
+  spf: false
+  dmarc: true
+  dmarc_policy: none

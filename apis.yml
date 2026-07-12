@@ -134,6 +134,12 @@ apis:
     and store_product_template_created/updated/deleted events posted to your
     endpoint URL.
 common:
+- type: VulnerabilityDisclosure
+  url: security/gelato-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/gelato-domain-security.yml
+- type: Authentication
+  url: authentication/gelato-authentication.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/gelato-com
 - type: Website
