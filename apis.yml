@@ -134,6 +134,8 @@ apis:
     and store_product_template_created/updated/deleted events posted to your
     endpoint URL.
 common:
+- type: AgenticAccess
+  url: agentic-access/gelato-agentic-access.yml
 - type: VulnerabilityDisclosure
   url: security/gelato-vulnerability-disclosure.yml
 - type: DomainSecurity
