@@ -1,0 +1,360 @@
+openapi: 3.0.1
+info:
+  title: Gelato Ecommerce Orders API
+  description: 'Specification of the Gelato print-on-demand API. Gelato exposes REST endpoints across dedicated subdomains: Orders (order.gelatoapis.com), Product Catalog and Prices/Stock (product.gelatoapis.com), Shipment (shipment.gelatoapis.com), and Ecommerce store products and templates (ecommerce.gelatoapis.com). All requests must be made over HTTPS and are authenticated with an API key passed in the X-API-KEY header.'
+  termsOfService: https://www.gelato.com/legal
+  contact:
+    name: Gelato Support
+    url: https://dashboard.gelato.com/docs/
+  version: '1.0'
+servers:
+- url: https://order.gelatoapis.com
+  description: Orders API
+- url: https://product.gelatoapis.com
+  description: Product Catalog, Prices and Stock API
+- url: https://shipment.gelatoapis.com
+  description: Shipment API
+- url: https://ecommerce.gelatoapis.com
+  description: Ecommerce API
+security:
+- api_key: []
+tags:
+- name: Orders
+paths:
+  /v4/orders:
+    post:
+      operationId: createOrder
+      tags:
+      - Orders
+      summary: Create order
+      description: Creates a new order for fulfillment. Supports order and draft order types, with one or more items, recipient details, and optional shipment method.
+      servers:
+      - url: https://order.gelatoapis.com
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrderRequest'
+      responses:
+        '200':
+          description: The created order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        4XX:
+          description: Client error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v4/orders:search:
+    post:
+      operationId: searchOrders
+      tags:
+      - Orders
+      summary: Search orders
+      description: Searches orders by criteria such as channels, countries, currencies, financial and fulfillment statuses, order types, and date range, with pagination.
+      servers:
+      - url: https://order.gelatoapis.com
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchOrdersRequest'
+      responses:
+        '200':
+          description: A page of orders matching the search criteria.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  orders:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Order'
+  /v4/orders:quote:
+    post:
+      operationId: quoteOrder
+      tags:
+      - Orders
+      summary: Quote order
+      description: Returns one or more quotes for a set of products to a given recipient, including available shipment methods and prices, before an order is placed.
+      servers:
+      - url: https://order.gelatoapis.com
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuoteOrderRequest'
+      responses:
+        '200':
+          description: Quotes for the requested products and recipient.
+  /v4/orders/{orderId}:
+    get:
+      operationId: getOrder
+      tags:
+      - Orders
+      summary: Get order
+      description: Retrieves the full details of a single order by its Gelato order id.
+      servers:
+      - url: https://order.gelatoapis.com
+      parameters:
+      - name: orderId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The requested order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+    patch:
+      operationId: patchDraftOrder
+      tags:
+      - Orders
+      summary: Patch draft order
+      description: Converts a draft order into a regular order. Only orders with orderType equal to draft can be patched.
+      servers:
+      - url: https://order.gelatoapis.com
+      parameters:
+      - name: orderId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                orderType:
+                  type: string
+                  enum:
+                  - order
+      responses:
+        '200':
+          description: The patched order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+  /v4/orders/{orderId}:cancel:
+    post:
+      operationId: cancelOrder
+      tags:
+      - Orders
+      summary: Cancel order
+      description: Cancels an order. An order can only be canceled before it moves into production.
+      servers:
+      - url: https://order.gelatoapis.com
+      parameters:
+      - name: orderId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The order was canceled.
+components:
+  schemas:
+    Order:
+      type: object
+      properties:
+        id:
+          type: string
+        orderType:
+          type: string
+        orderReferenceId:
+          type: string
+        customerReferenceId:
+          type: string
+        fulfillmentStatus:
+          type: string
+        financialStatus:
+          type: string
+        currency:
+          type: string
+        channel:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
+        shipment:
+          type: object
+          properties:
+            shipmentMethodUid:
+              type: string
+            shipmentMethodName:
+              type: string
+            minDeliveryDays:
+              type: integer
+            maxDeliveryDays:
+              type: integer
+    SearchOrdersRequest:
+      type: object
+      properties:
+        channels:
+          type: array
+          items:
+            type: string
+        countries:
+          type: array
+          items:
+            type: string
+        currencies:
+          type: array
+          items:
+            type: string
+        financialStatuses:
+          type: array
+          items:
+            type: string
+        fulfillmentStatuses:
+          type: array
+          items:
+            type: string
+        orderTypes:
+          type: array
+          items:
+            type: string
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        limit:
+          type: integer
+        offset:
+          type: integer
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          nullable: true
+        message:
+          type: string
+          nullable: false
+    CreateOrderRequest:
+      type: object
+      required:
+      - orderReferenceId
+      - customerReferenceId
+      - items
+      - shippingAddress
+      properties:
+        orderType:
+          type: string
+          enum:
+          - order
+          - draft
+          default: order
+        orderReferenceId:
+          type: string
+          description: Your internal order id.
+        customerReferenceId:
+          type: string
+          description: Your internal customer id.
+        currency:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
+        shipmentMethodUid:
+          type: string
+        shippingAddress:
+          $ref: '#/components/schemas/ShippingAddress'
+    ShippingAddress:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        companyName:
+          type: string
+        addressLine1:
+          type: string
+        addressLine2:
+          type: string
+        city:
+          type: string
+        postCode:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+          description: Two-character ISO country code.
+        email:
+          type: string
+        phone:
+          type: string
+    QuoteOrderRequest:
+      type: object
+      required:
+      - orderReferenceId
+      - customerReferenceId
+      - recipient
+      - products
+      properties:
+        orderReferenceId:
+          type: string
+        customerReferenceId:
+          type: string
+        currency:
+          type: string
+        recipient:
+          $ref: '#/components/schemas/ShippingAddress'
+        products:
+          type: array
+          items:
+            type: object
+            properties:
+              itemReferenceId:
+                type: string
+              productUid:
+                type: string
+              quantity:
+                type: integer
+    OrderItem:
+      type: object
+      properties:
+        itemReferenceId:
+          type: string
+        productUid:
+          type: string
+        files:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              url:
+                type: string
+        quantity:
+          type: integer
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+      description: Gelato API key passed in the X-API-KEY header on every request. All requests must be made over HTTPS.

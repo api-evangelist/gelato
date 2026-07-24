@@ -1,0 +1,213 @@
+openapi: 3.0.1
+info:
+  title: Gelato Ecommerce Product Catalog API
+  description: 'Specification of the Gelato print-on-demand API. Gelato exposes REST endpoints across dedicated subdomains: Orders (order.gelatoapis.com), Product Catalog and Prices/Stock (product.gelatoapis.com), Shipment (shipment.gelatoapis.com), and Ecommerce store products and templates (ecommerce.gelatoapis.com). All requests must be made over HTTPS and are authenticated with an API key passed in the X-API-KEY header.'
+  termsOfService: https://www.gelato.com/legal
+  contact:
+    name: Gelato Support
+    url: https://dashboard.gelato.com/docs/
+  version: '1.0'
+servers:
+- url: https://order.gelatoapis.com
+  description: Orders API
+- url: https://product.gelatoapis.com
+  description: Product Catalog, Prices and Stock API
+- url: https://shipment.gelatoapis.com
+  description: Shipment API
+- url: https://ecommerce.gelatoapis.com
+  description: Ecommerce API
+security:
+- api_key: []
+tags:
+- name: Product Catalog
+paths:
+  /v3/catalogs:
+    get:
+      operationId: listCatalogs
+      tags:
+      - Product Catalog
+      summary: List catalogs
+      description: Returns the list of available product catalogs.
+      servers:
+      - url: https://product.gelatoapis.com
+      responses:
+        '200':
+          description: A list of catalogs.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Catalog'
+  /v3/catalogs/{catalogUid}:
+    get:
+      operationId: getCatalog
+      tags:
+      - Product Catalog
+      summary: Get catalog
+      description: Returns a single catalog including the product attributes and their possible values used to filter products.
+      servers:
+      - url: https://product.gelatoapis.com
+      parameters:
+      - name: catalogUid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The requested catalog.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Catalog'
+  /v3/catalogs/{catalogUid}/products:search:
+    post:
+      operationId: searchProducts
+      tags:
+      - Product Catalog
+      summary: Search products
+      description: Searches for products within a catalog, filtered by product attributes, with pagination.
+      servers:
+      - url: https://product.gelatoapis.com
+      parameters:
+      - name: catalogUid
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                attributeFilters:
+                  type: object
+                  additionalProperties:
+                    type: array
+                    items:
+                      type: string
+                limit:
+                  type: integer
+                offset:
+                  type: integer
+      responses:
+        '200':
+          description: Matching products in the catalog.
+  /v3/products/{productUid}:
+    get:
+      operationId: getProduct
+      tags:
+      - Product Catalog
+      summary: Get product
+      description: Returns the details of a single product by its product UID.
+      servers:
+      - url: https://product.gelatoapis.com
+      parameters:
+      - name: productUid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The requested product.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+  /v3/products/{productUid}/cover-dimensions:
+    get:
+      operationId: getCoverDimensions
+      tags:
+      - Product Catalog
+      summary: Cover dimensions
+      description: Returns the dimensions of the cover of a multi-page product such as a photo book or brochure, given the number of pages.
+      servers:
+      - url: https://product.gelatoapis.com
+      parameters:
+      - name: productUid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: pageCount
+        in: query
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: The cover dimensions for the product.
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        productUid:
+          type: string
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
+        weight:
+          type: object
+          properties:
+            value:
+              type: number
+            measureUnit:
+              type: string
+        dimensions:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              value:
+                type: number
+              measureUnit:
+                type: string
+        supportedCountries:
+          type: array
+          items:
+            type: string
+        notSupportedCountries:
+          type: array
+          items:
+            type: string
+        isStockable:
+          type: boolean
+        isPrintable:
+          type: boolean
+    Catalog:
+      type: object
+      properties:
+        catalogUid:
+          type: string
+        title:
+          type: string
+        productAttributes:
+          type: array
+          items:
+            type: object
+            properties:
+              productAttributeUid:
+                type: string
+              title:
+                type: string
+              values:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    productAttributeValueUid:
+                      type: string
+                    title:
+                      type: string
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+      description: Gelato API key passed in the X-API-KEY header on every request. All requests must be made over HTTPS.

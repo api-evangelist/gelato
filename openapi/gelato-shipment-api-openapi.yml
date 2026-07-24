@@ -1,0 +1,77 @@
+openapi: 3.0.1
+info:
+  title: Gelato Ecommerce Shipment API
+  description: 'Specification of the Gelato print-on-demand API. Gelato exposes REST endpoints across dedicated subdomains: Orders (order.gelatoapis.com), Product Catalog and Prices/Stock (product.gelatoapis.com), Shipment (shipment.gelatoapis.com), and Ecommerce store products and templates (ecommerce.gelatoapis.com). All requests must be made over HTTPS and are authenticated with an API key passed in the X-API-KEY header.'
+  termsOfService: https://www.gelato.com/legal
+  contact:
+    name: Gelato Support
+    url: https://dashboard.gelato.com/docs/
+  version: '1.0'
+servers:
+- url: https://order.gelatoapis.com
+  description: Orders API
+- url: https://product.gelatoapis.com
+  description: Product Catalog, Prices and Stock API
+- url: https://shipment.gelatoapis.com
+  description: Shipment API
+- url: https://ecommerce.gelatoapis.com
+  description: Ecommerce API
+security:
+- api_key: []
+tags:
+- name: Shipment
+paths:
+  /v1/shipment-methods:
+    get:
+      operationId: listShipmentMethods
+      tags:
+      - Shipment
+      summary: Shipment methods
+      description: Returns the shipment methods Gelato provides, optionally filtered by destination country.
+      servers:
+      - url: https://shipment.gelatoapis.com
+      parameters:
+      - name: country
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The available shipment methods.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  shipmentMethods:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ShipmentMethod'
+components:
+  schemas:
+    ShipmentMethod:
+      type: object
+      properties:
+        shipmentMethodUid:
+          type: string
+        type:
+          type: string
+        name:
+          type: string
+        isBusiness:
+          type: boolean
+        isPrivate:
+          type: boolean
+        hasTracking:
+          type: boolean
+        supportedCountries:
+          type: array
+          items:
+            type: string
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+      description: Gelato API key passed in the X-API-KEY header on every request. All requests must be made over HTTPS.

@@ -1,0 +1,85 @@
+openapi: 3.0.1
+info:
+  title: Gelato Ecommerce Prices API
+  description: 'Specification of the Gelato print-on-demand API. Gelato exposes REST endpoints across dedicated subdomains: Orders (order.gelatoapis.com), Product Catalog and Prices/Stock (product.gelatoapis.com), Shipment (shipment.gelatoapis.com), and Ecommerce store products and templates (ecommerce.gelatoapis.com). All requests must be made over HTTPS and are authenticated with an API key passed in the X-API-KEY header.'
+  termsOfService: https://www.gelato.com/legal
+  contact:
+    name: Gelato Support
+    url: https://dashboard.gelato.com/docs/
+  version: '1.0'
+servers:
+- url: https://order.gelatoapis.com
+  description: Orders API
+- url: https://product.gelatoapis.com
+  description: Product Catalog, Prices and Stock API
+- url: https://shipment.gelatoapis.com
+  description: Shipment API
+- url: https://ecommerce.gelatoapis.com
+  description: Ecommerce API
+security:
+- api_key: []
+tags:
+- name: Prices
+paths:
+  /v3/products/{productUid}/prices:
+    get:
+      operationId: getProductPrices
+      tags:
+      - Prices
+      summary: Price
+      description: Returns prices for all quantities of a product, optionally filtered by country, currency, and page count.
+      servers:
+      - url: https://product.gelatoapis.com
+      parameters:
+      - name: productUid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: country
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: currency
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: pageCount
+        in: query
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Prices for the product.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Price'
+components:
+  schemas:
+    Price:
+      type: object
+      properties:
+        productUid:
+          type: string
+        country:
+          type: string
+        quantity:
+          type: integer
+        price:
+          type: number
+        currency:
+          type: string
+        pageCount:
+          type: integer
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+      description: Gelato API key passed in the X-API-KEY header on every request. All requests must be made over HTTPS.

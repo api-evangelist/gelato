@@ -1,0 +1,53 @@
+openapi: 3.0.1
+info:
+  title: Gelato Ecommerce Stock API
+  description: 'Specification of the Gelato print-on-demand API. Gelato exposes REST endpoints across dedicated subdomains: Orders (order.gelatoapis.com), Product Catalog and Prices/Stock (product.gelatoapis.com), Shipment (shipment.gelatoapis.com), and Ecommerce store products and templates (ecommerce.gelatoapis.com). All requests must be made over HTTPS and are authenticated with an API key passed in the X-API-KEY header.'
+  termsOfService: https://www.gelato.com/legal
+  contact:
+    name: Gelato Support
+    url: https://dashboard.gelato.com/docs/
+  version: '1.0'
+servers:
+- url: https://order.gelatoapis.com
+  description: Orders API
+- url: https://product.gelatoapis.com
+  description: Product Catalog, Prices and Stock API
+- url: https://shipment.gelatoapis.com
+  description: Shipment API
+- url: https://ecommerce.gelatoapis.com
+  description: Ecommerce API
+security:
+- api_key: []
+tags:
+- name: Stock
+paths:
+  /v3/stock/region-availability:
+    post:
+      operationId: getStockRegionAvailability
+      tags:
+      - Stock
+      summary: Stock availability
+      description: Returns the availability of stock-able products across Gelato's production regions for a list of product UIDs.
+      servers:
+      - url: https://product.gelatoapis.com
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                products:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: Stock availability by region.
+components:
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+      description: Gelato API key passed in the X-API-KEY header on every request. All requests must be made over HTTPS.

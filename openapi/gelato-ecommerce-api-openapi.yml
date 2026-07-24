@@ -1,0 +1,185 @@
+openapi: 3.0.1
+info:
+  title: Gelato Ecommerce API
+  description: 'Specification of the Gelato print-on-demand API. Gelato exposes REST endpoints across dedicated subdomains: Orders (order.gelatoapis.com), Product Catalog and Prices/Stock (product.gelatoapis.com), Shipment (shipment.gelatoapis.com), and Ecommerce store products and templates (ecommerce.gelatoapis.com). All requests must be made over HTTPS and are authenticated with an API key passed in the X-API-KEY header.'
+  termsOfService: https://www.gelato.com/legal
+  contact:
+    name: Gelato Support
+    url: https://dashboard.gelato.com/docs/
+  version: '1.0'
+servers:
+- url: https://order.gelatoapis.com
+  description: Orders API
+- url: https://product.gelatoapis.com
+  description: Product Catalog, Prices and Stock API
+- url: https://shipment.gelatoapis.com
+  description: Shipment API
+- url: https://ecommerce.gelatoapis.com
+  description: Ecommerce API
+security:
+- api_key: []
+tags:
+- name: Ecommerce
+paths:
+  /v1/stores/{storeId}/products:
+    get:
+      operationId: listStoreProducts
+      tags:
+      - Ecommerce
+      summary: List products
+      description: Returns a paginated list of products in a connected store.
+      servers:
+      - url: https://ecommerce.gelatoapis.com
+      parameters:
+      - name: storeId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: orderBy
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: order
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: A page of store products.
+  /v1/stores/{storeId}/products/{productId}:
+    get:
+      operationId: getStoreProduct
+      tags:
+      - Ecommerce
+      summary: Get product
+      description: Returns a single product from a connected store.
+      servers:
+      - url: https://ecommerce.gelatoapis.com
+      parameters:
+      - name: storeId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: productId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The requested store product.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreProduct'
+  /v1/stores/{storeId}/products:create-from-template:
+    post:
+      operationId: createProductFromTemplate
+      tags:
+      - Ecommerce
+      summary: Create product from template
+      description: Creates a store product from an existing template, supplying title, description, and variant overrides.
+      servers:
+      - url: https://ecommerce.gelatoapis.com
+      parameters:
+      - name: storeId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                templateId:
+                  type: string
+                title:
+                  type: string
+                description:
+                  type: string
+      responses:
+        '200':
+          description: The created store product.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreProduct'
+  /v1/templates/{templateId}:
+    get:
+      operationId: getTemplate
+      tags:
+      - Ecommerce
+      summary: Get template
+      description: Returns the details of a product template by its template id.
+      servers:
+      - url: https://ecommerce.gelatoapis.com
+      parameters:
+      - name: templateId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The requested template.
+components:
+  schemas:
+    StoreProduct:
+      type: object
+      properties:
+        id:
+          type: string
+        storeId:
+          type: string
+        externalId:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+        publishingErrorCode:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        variants:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              title:
+                type: string
+              externalId:
+                type: string
+              productUid:
+                type: string
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+      description: Gelato API key passed in the X-API-KEY header on every request. All requests must be made over HTTPS.
