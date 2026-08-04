@@ -1,0 +1,24 @@
+{
+  "provider": "gelato",
+  "sources": [
+    "gelato-ecommerce-api-openapi.yml",
+    "gelato-orders-api-openapi.yml",
+    "gelato-prices-api-openapi.yml",
+    "gelato-product-catalog-api-openapi.yml",
+    "gelato-shipment-api-openapi.yml",
+    "gelato-stock-api-openapi.yml"
+  ],
+  "outputs": [
+    "gelato-ecommerce-api-openapi.yml",
+    "gelato-orders-api-openapi.yml",
+    "gelato-prices-api-openapi.yml",
+    "gelato-product-catalog-api-openapi.yml",
+    "gelato-shipment-api-openapi.yml",
+    "gelato-stock-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

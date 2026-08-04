@@ -1,0 +1,859 @@
+openapi: 3.0.1
+info:
+  title: Gelato API
+  description: >-
+    Specification of the Gelato print-on-demand API. Gelato exposes REST
+    endpoints across dedicated subdomains: Orders (order.gelatoapis.com),
+    Product Catalog and Prices/Stock (product.gelatoapis.com), Shipment
+    (shipment.gelatoapis.com), and Ecommerce store products and templates
+    (ecommerce.gelatoapis.com). All requests must be made over HTTPS and are
+    authenticated with an API key passed in the X-API-KEY header.
+  termsOfService: https://www.gelato.com/legal
+  contact:
+    name: Gelato Support
+    url: https://dashboard.gelato.com/docs/
+  version: '1.0'
+servers:
+  - url: https://order.gelatoapis.com
+    description: Orders API
+  - url: https://product.gelatoapis.com
+    description: Product Catalog, Prices and Stock API
+  - url: https://shipment.gelatoapis.com
+    description: Shipment API
+  - url: https://ecommerce.gelatoapis.com
+    description: Ecommerce API
+security:
+  - api_key: []
+tags:
+  - name: Orders
+  - name: Product Catalog
+  - name: Prices
+  - name: Stock
+  - name: Shipment
+  - name: Ecommerce
+paths:
+  /v4/orders:
+    post:
+      operationId: createOrder
+      tags:
+        - Orders
+      summary: Create order
+      description: >-
+        Creates a new order for fulfillment. Supports order and draft order
+        types, with one or more items, recipient details, and optional
+        shipment method.
+      servers:
+        - url: https://order.gelatoapis.com
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrderRequest'
+      responses:
+        '200':
+          description: The created order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '4XX':
+          description: Client error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v4/orders:search:
+    post:
+      operationId: searchOrders
+      tags:
+        - Orders
+      summary: Search orders
+      description: >-
+        Searches orders by criteria such as channels, countries, currencies,
+        financial and fulfillment statuses, order types, and date range, with
+        pagination.
+      servers:
+        - url: https://order.gelatoapis.com
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchOrdersRequest'
+      responses:
+        '200':
+          description: A page of orders matching the search criteria.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  orders:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Order'
+  /v4/orders:quote:
+    post:
+      operationId: quoteOrder
+      tags:
+        - Orders
+      summary: Quote order
+      description: >-
+        Returns one or more quotes for a set of products to a given recipient,
+        including available shipment methods and prices, before an order is
+        placed.
+      servers:
+        - url: https://order.gelatoapis.com
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuoteOrderRequest'
+      responses:
+        '200':
+          description: Quotes for the requested products and recipient.
+  /v4/orders/{orderId}:
+    get:
+      operationId: getOrder
+      tags:
+        - Orders
+      summary: Get order
+      description: Retrieves the full details of a single order by its Gelato order id.
+      servers:
+        - url: https://order.gelatoapis.com
+      parameters:
+        - name: orderId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The requested order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+    patch:
+      operationId: patchDraftOrder
+      tags:
+        - Orders
+      summary: Patch draft order
+      description: >-
+        Converts a draft order into a regular order. Only orders with
+        orderType equal to draft can be patched.
+      servers:
+        - url: https://order.gelatoapis.com
+      parameters:
+        - name: orderId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                orderType:
+                  type: string
+                  enum:
+                    - order
+      responses:
+        '200':
+          description: The patched order.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+  /v4/orders/{orderId}:cancel:
+    post:
+      operationId: cancelOrder
+      tags:
+        - Orders
+      summary: Cancel order
+      description: >-
+        Cancels an order. An order can only be canceled before it moves into
+        production.
+      servers:
+        - url: https://order.gelatoapis.com
+      parameters:
+        - name: orderId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The order was canceled.
+  /v3/catalogs:
+    get:
+      operationId: listCatalogs
+      tags:
+        - Product Catalog
+      summary: List catalogs
+      description: Returns the list of available product catalogs.
+      servers:
+        - url: https://product.gelatoapis.com
+      responses:
+        '200':
+          description: A list of catalogs.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Catalog'
+  /v3/catalogs/{catalogUid}:
+    get:
+      operationId: getCatalog
+      tags:
+        - Product Catalog
+      summary: Get catalog
+      description: >-
+        Returns a single catalog including the product attributes and their
+        possible values used to filter products.
+      servers:
+        - url: https://product.gelatoapis.com
+      parameters:
+        - name: catalogUid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The requested catalog.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Catalog'
+  /v3/catalogs/{catalogUid}/products:search:
+    post:
+      operationId: searchProducts
+      tags:
+        - Product Catalog
+      summary: Search products
+      description: >-
+        Searches for products within a catalog, filtered by product attributes,
+        with pagination.
+      servers:
+        - url: https://product.gelatoapis.com
+      parameters:
+        - name: catalogUid
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                attributeFilters:
+                  type: object
+                  additionalProperties:
+                    type: array
+                    items:
+                      type: string
+                limit:
+                  type: integer
+                offset:
+                  type: integer
+      responses:
+        '200':
+          description: Matching products in the catalog.
+  /v3/products/{productUid}:
+    get:
+      operationId: getProduct
+      tags:
+        - Product Catalog
+      summary: Get product
+      description: Returns the details of a single product by its product UID.
+      servers:
+        - url: https://product.gelatoapis.com
+      parameters:
+        - name: productUid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The requested product.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+  /v3/products/{productUid}/cover-dimensions:
+    get:
+      operationId: getCoverDimensions
+      tags:
+        - Product Catalog
+      summary: Cover dimensions
+      description: >-
+        Returns the dimensions of the cover of a multi-page product such as a
+        photo book or brochure, given the number of pages.
+      servers:
+        - url: https://product.gelatoapis.com
+      parameters:
+        - name: productUid
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: pageCount
+          in: query
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: The cover dimensions for the product.
+  /v3/products/{productUid}/prices:
+    get:
+      operationId: getProductPrices
+      tags:
+        - Prices
+      summary: Price
+      description: >-
+        Returns prices for all quantities of a product, optionally filtered by
+        country, currency, and page count.
+      servers:
+        - url: https://product.gelatoapis.com
+      parameters:
+        - name: productUid
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: country
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: currency
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: pageCount
+          in: query
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Prices for the product.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Price'
+  /v3/stock/region-availability:
+    post:
+      operationId: getStockRegionAvailability
+      tags:
+        - Stock
+      summary: Stock availability
+      description: >-
+        Returns the availability of stock-able products across Gelato's
+        production regions for a list of product UIDs.
+      servers:
+        - url: https://product.gelatoapis.com
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                products:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: Stock availability by region.
+  /v1/shipment-methods:
+    get:
+      operationId: listShipmentMethods
+      tags:
+        - Shipment
+      summary: Shipment methods
+      description: >-
+        Returns the shipment methods Gelato provides, optionally filtered by
+        destination country.
+      servers:
+        - url: https://shipment.gelatoapis.com
+      parameters:
+        - name: country
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The available shipment methods.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  shipmentMethods:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ShipmentMethod'
+  /v1/stores/{storeId}/products:
+    get:
+      operationId: listStoreProducts
+      tags:
+        - Ecommerce
+      summary: List products
+      description: Returns a paginated list of products in a connected store.
+      servers:
+        - url: https://ecommerce.gelatoapis.com
+      parameters:
+        - name: storeId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: orderBy
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: order
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: A page of store products.
+  /v1/stores/{storeId}/products/{productId}:
+    get:
+      operationId: getStoreProduct
+      tags:
+        - Ecommerce
+      summary: Get product
+      description: Returns a single product from a connected store.
+      servers:
+        - url: https://ecommerce.gelatoapis.com
+      parameters:
+        - name: storeId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: productId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The requested store product.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreProduct'
+  /v1/stores/{storeId}/products:create-from-template:
+    post:
+      operationId: createProductFromTemplate
+      tags:
+        - Ecommerce
+      summary: Create product from template
+      description: >-
+        Creates a store product from an existing template, supplying title,
+        description, and variant overrides.
+      servers:
+        - url: https://ecommerce.gelatoapis.com
+      parameters:
+        - name: storeId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                templateId:
+                  type: string
+                title:
+                  type: string
+                description:
+                  type: string
+      responses:
+        '200':
+          description: The created store product.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreProduct'
+  /v1/templates/{templateId}:
+    get:
+      operationId: getTemplate
+      tags:
+        - Ecommerce
+      summary: Get template
+      description: Returns the details of a product template by its template id.
+      servers:
+        - url: https://ecommerce.gelatoapis.com
+      parameters:
+        - name: templateId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The requested template.
+components:
+  securitySchemes:
+    api_key:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+      description: >-
+        Gelato API key passed in the X-API-KEY header on every request. All
+        requests must be made over HTTPS.
+  schemas:
+    CreateOrderRequest:
+      type: object
+      required:
+        - orderReferenceId
+        - customerReferenceId
+        - items
+        - shippingAddress
+      properties:
+        orderType:
+          type: string
+          enum:
+            - order
+            - draft
+          default: order
+        orderReferenceId:
+          type: string
+          description: Your internal order id.
+        customerReferenceId:
+          type: string
+          description: Your internal customer id.
+        currency:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
+        shipmentMethodUid:
+          type: string
+        shippingAddress:
+          $ref: '#/components/schemas/ShippingAddress'
+    SearchOrdersRequest:
+      type: object
+      properties:
+        channels:
+          type: array
+          items:
+            type: string
+        countries:
+          type: array
+          items:
+            type: string
+        currencies:
+          type: array
+          items:
+            type: string
+        financialStatuses:
+          type: array
+          items:
+            type: string
+        fulfillmentStatuses:
+          type: array
+          items:
+            type: string
+        orderTypes:
+          type: array
+          items:
+            type: string
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        limit:
+          type: integer
+        offset:
+          type: integer
+    QuoteOrderRequest:
+      type: object
+      required:
+        - orderReferenceId
+        - customerReferenceId
+        - recipient
+        - products
+      properties:
+        orderReferenceId:
+          type: string
+        customerReferenceId:
+          type: string
+        currency:
+          type: string
+        recipient:
+          $ref: '#/components/schemas/ShippingAddress'
+        products:
+          type: array
+          items:
+            type: object
+            properties:
+              itemReferenceId:
+                type: string
+              productUid:
+                type: string
+              quantity:
+                type: integer
+    OrderItem:
+      type: object
+      properties:
+        itemReferenceId:
+          type: string
+        productUid:
+          type: string
+        files:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              url:
+                type: string
+        quantity:
+          type: integer
+    ShippingAddress:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        companyName:
+          type: string
+        addressLine1:
+          type: string
+        addressLine2:
+          type: string
+        city:
+          type: string
+        postCode:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+          description: Two-character ISO country code.
+        email:
+          type: string
+        phone:
+          type: string
+    Order:
+      type: object
+      properties:
+        id:
+          type: string
+        orderType:
+          type: string
+        orderReferenceId:
+          type: string
+        customerReferenceId:
+          type: string
+        fulfillmentStatus:
+          type: string
+        financialStatus:
+          type: string
+        currency:
+          type: string
+        channel:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
+        shipment:
+          type: object
+          properties:
+            shipmentMethodUid:
+              type: string
+            shipmentMethodName:
+              type: string
+            minDeliveryDays:
+              type: integer
+            maxDeliveryDays:
+              type: integer
+    Catalog:
+      type: object
+      properties:
+        catalogUid:
+          type: string
+        title:
+          type: string
+        productAttributes:
+          type: array
+          items:
+            type: object
+            properties:
+              productAttributeUid:
+                type: string
+              title:
+                type: string
+              values:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    productAttributeValueUid:
+                      type: string
+                    title:
+                      type: string
+    Product:
+      type: object
+      properties:
+        productUid:
+          type: string
+        attributes:
+          type: object
+          additionalProperties:
+            type: string
+        weight:
+          type: object
+          properties:
+            value:
+              type: number
+            measureUnit:
+              type: string
+        dimensions:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              value:
+                type: number
+              measureUnit:
+                type: string
+        supportedCountries:
+          type: array
+          items:
+            type: string
+        notSupportedCountries:
+          type: array
+          items:
+            type: string
+        isStockable:
+          type: boolean
+        isPrintable:
+          type: boolean
+    Price:
+      type: object
+      properties:
+        productUid:
+          type: string
+        country:
+          type: string
+        quantity:
+          type: integer
+        price:
+          type: number
+        currency:
+          type: string
+        pageCount:
+          type: integer
+    ShipmentMethod:
+      type: object
+      properties:
+        shipmentMethodUid:
+          type: string
+        type:
+          type: string
+        name:
+          type: string
+        isBusiness:
+          type: boolean
+        isPrivate:
+          type: boolean
+        hasTracking:
+          type: boolean
+        supportedCountries:
+          type: array
+          items:
+            type: string
+    StoreProduct:
+      type: object
+      properties:
+        id:
+          type: string
+        storeId:
+          type: string
+        externalId:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+        publishingErrorCode:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        variants:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              title:
+                type: string
+              externalId:
+                type: string
+              productUid:
+                type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          nullable: true
+        message:
+          type: string
+          nullable: false
