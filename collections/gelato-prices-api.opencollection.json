@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gelato Ecommerce Prices API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-KEY",
+      "value": "{{X-API-KEY}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Prices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Price",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://order.gelatoapis.com/v3/products/:productUid/prices",
+            "params": [
+              {
+                "name": "productUid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "country",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "currency",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageCount",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns prices for all quantities of a product, optionally filtered by country, currency, and page count."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gelato Ecommerce Stock API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-KEY",
+      "value": "{{X-API-KEY}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Stock",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Stock availability",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://order.gelatoapis.com/v3/stock/region-availability",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns the availability of stock-able products across Gelato's production regions for a list of product UIDs."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

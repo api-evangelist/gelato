@@ -1,0 +1,734 @@
+{
+  "item": [
+    {
+      "id": "1cd88c66-60de-48a2-8cad-66b5f13fb411",
+      "name": "Orders",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "52b3db00-d1a0-4ec9-98eb-ab354e1f8ba3",
+          "name": "Create order",
+          "request": {
+            "name": "Create order",
+            "description": {
+              "content": "Creates a new order for fulfillment. Supports order and draft order types, with one or more items, recipient details, and optional shipment method.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "v4",
+                "orders"
+              ],
+              "host": [
+                "order",
+                "gelatoapis",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"orderReferenceId\": \"<string>\",\n  \"customerReferenceId\": \"<string>\",\n  \"items\": [\n    {\n      \"itemReferenceId\": \"<string>\",\n      \"productUid\": \"<string>\",\n      \"files\": [\n        {\n          \"type\": \"<string>\",\n          \"url\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"url\": \"<string>\"\n        }\n      ],\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"itemReferenceId\": \"<string>\",\n      \"productUid\": \"<string>\",\n      \"files\": [\n        {\n          \"type\": \"<string>\",\n          \"url\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"url\": \"<string>\"\n        }\n      ],\n      \"quantity\": \"<integer>\"\n    }\n  ],\n  \"shippingAddress\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"companyName\": \"<string>\",\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postCode\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"orderType\": \"order\",\n  \"currency\": \"<string>\",\n  \"shipmentMethodUid\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e0852bec-4bd8-42ef-a60d-dbfdc7049274",
+              "name": "The created order.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v4",
+                    "orders"
+                  ],
+                  "host": [
+                    "order",
+                    "gelatoapis",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"orderReferenceId\": \"<string>\",\n  \"customerReferenceId\": \"<string>\",\n  \"items\": [\n    {\n      \"itemReferenceId\": \"<string>\",\n      \"productUid\": \"<string>\",\n      \"files\": [\n        {\n          \"type\": \"<string>\",\n          \"url\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"url\": \"<string>\"\n        }\n      ],\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"itemReferenceId\": \"<string>\",\n      \"productUid\": \"<string>\",\n      \"files\": [\n        {\n          \"type\": \"<string>\",\n          \"url\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"url\": \"<string>\"\n        }\n      ],\n      \"quantity\": \"<integer>\"\n    }\n  ],\n  \"shippingAddress\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"companyName\": \"<string>\",\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postCode\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"orderType\": \"order\",\n  \"currency\": \"<string>\",\n  \"shipmentMethodUid\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"orderType\": \"string\",\n  \"orderReferenceId\": \"string\",\n  \"customerReferenceId\": \"string\",\n  \"fulfillmentStatus\": \"string\",\n  \"financialStatus\": \"string\",\n  \"currency\": \"string\",\n  \"channel\": \"string\",\n  \"createdAt\": \"2008-10-14T07:25:20.809Z\",\n  \"items\": [\n    {\n      \"itemReferenceId\": \"<string>\",\n      \"productUid\": \"<string>\",\n      \"files\": [\n        {\n          \"type\": \"<string>\",\n          \"url\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"url\": \"<string>\"\n        }\n      ],\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"itemReferenceId\": \"<string>\",\n      \"productUid\": \"<string>\",\n      \"files\": [\n        {\n          \"type\": \"<string>\",\n          \"url\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"url\": \"<string>\"\n        }\n      ],\n      \"quantity\": \"<integer>\"\n    }\n  ],\n  \"shipment\": {\n    \"shipmentMethodUid\": \"string\",\n    \"shipmentMethodName\": \"string\",\n    \"minDeliveryDays\": 4129,\n    \"maxDeliveryDays\": 5692\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d4023856-a20f-4014-a7bc-2ccd4b244be9",
+              "name": "Client error.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v4",
+                    "orders"
+                  ],
+                  "host": [
+                    "order",
+                    "gelatoapis",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"orderReferenceId\": \"<string>\",\n  \"customerReferenceId\": \"<string>\",\n  \"items\": [\n    {\n      \"itemReferenceId\": \"<string>\",\n      \"productUid\": \"<string>\",\n      \"files\": [\n        {\n          \"type\": \"<string>\",\n          \"url\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"url\": \"<string>\"\n        }\n      ],\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"itemReferenceId\": \"<string>\",\n      \"productUid\": \"<string>\",\n      \"files\": [\n        {\n          \"type\": \"<string>\",\n          \"url\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"url\": \"<string>\"\n        }\n      ],\n      \"quantity\": \"<integer>\"\n    }\n  ],\n  \"shippingAddress\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"companyName\": \"<string>\",\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postCode\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"orderType\": \"order\",\n  \"currency\": \"<string>\",\n  \"shipmentMethodUid\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0ece6e8c-ec06-4d81-b98c-c4478e5eaf32",
+          "name": "Search orders",
+          "request": {
+            "name": "Search orders",
+            "description": {
+              "content": "Searches orders by criteria such as channels, countries, currencies, financial and fulfillment statuses, order types, and date range, with pagination.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "v4",
+                "orders:search"
+              ],
+              "host": [
+                "order",
+                "gelatoapis",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"channels\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"countries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"currencies\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"financialStatuses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fulfillmentStatuses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"orderTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"startDate\": \"<dateTime>\",\n  \"endDate\": \"<dateTime>\",\n  \"limit\": \"<integer>\",\n  \"offset\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d48fb882-d25d-4935-8525-24f0937b1353",
+              "name": "A page of orders matching the search criteria.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v4",
+                    "orders:search"
+                  ],
+                  "host": [
+                    "order",
+                    "gelatoapis",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"channels\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"countries\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"currencies\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"financialStatuses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fulfillmentStatuses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"orderTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"startDate\": \"<dateTime>\",\n  \"endDate\": \"<dateTime>\",\n  \"limit\": \"<integer>\",\n  \"offset\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"orders\": [\n    {\n      \"id\": \"string\",\n      \"orderType\": \"string\",\n      \"orderReferenceId\": \"string\",\n      \"customerReferenceId\": \"string\",\n      \"fulfillmentStatus\": \"string\",\n      \"financialStatus\": \"string\",\n      \"currency\": \"string\",\n      \"channel\": \"string\",\n      \"createdAt\": \"1958-06-06T10:49:15.006Z\",\n      \"items\": [\n        {\n          \"itemReferenceId\": \"<string>\",\n          \"productUid\": \"<string>\",\n          \"files\": [\n            {\n              \"type\": \"<string>\",\n              \"url\": \"<string>\"\n            },\n            {\n              \"type\": \"<string>\",\n              \"url\": \"<string>\"\n            }\n          ],\n          \"quantity\": \"<integer>\"\n        },\n        {\n          \"itemReferenceId\": \"<string>\",\n          \"productUid\": \"<string>\",\n          \"files\": [\n            {\n              \"type\": \"<string>\",\n              \"url\": \"<string>\"\n            },\n            {\n              \"type\": \"<string>\",\n              \"url\": \"<string>\"\n            }\n          ],\n          \"quantity\": \"<integer>\"\n        }\n      ],\n      \"shipment\": {\n        \"shipmentMethodUid\": \"string\",\n        \"shipmentMethodName\": \"string\",\n        \"minDeliveryDays\": 5395,\n        \"maxDeliveryDays\": 926\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"orderType\": \"string\",\n      \"orderReferenceId\": \"string\",\n      \"customerReferenceId\": \"string\",\n      \"fulfillmentStatus\": \"string\",\n      \"financialStatus\": \"string\",\n      \"currency\": \"string\",\n      \"channel\": \"string\",\n      \"createdAt\": \"1967-02-06T01:06:52.138Z\",\n      \"items\": [\n        {\n          \"itemReferenceId\": \"<string>\",\n          \"productUid\": \"<string>\",\n          \"files\": [\n            {\n              \"type\": \"<string>\",\n              \"url\": \"<string>\"\n            },\n            {\n              \"type\": \"<string>\",\n              \"url\": \"<string>\"\n            }\n          ],\n          \"quantity\": \"<integer>\"\n        },\n        {\n          \"itemReferenceId\": \"<string>\",\n          \"productUid\": \"<string>\",\n          \"files\": [\n            {\n              \"type\": \"<string>\",\n              \"url\": \"<string>\"\n            },\n            {\n              \"type\": \"<string>\",\n              \"url\": \"<string>\"\n            }\n          ],\n          \"quantity\": \"<integer>\"\n        }\n      ],\n      \"shipment\": {\n        \"shipmentMethodUid\": \"string\",\n        \"shipmentMethodName\": \"string\",\n        \"minDeliveryDays\": 8859,\n        \"maxDeliveryDays\": 9672\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4f8ae3c9-a1ab-48e8-8fea-47ed45c76bc6",
+          "name": "Quote order",
+          "request": {
+            "name": "Quote order",
+            "description": {
+              "content": "Returns one or more quotes for a set of products to a given recipient, including available shipment methods and prices, before an order is placed.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "v4",
+                "orders:quote"
+              ],
+              "host": [
+                "order",
+                "gelatoapis",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"orderReferenceId\": \"<string>\",\n  \"customerReferenceId\": \"<string>\",\n  \"recipient\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"companyName\": \"<string>\",\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postCode\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"products\": [\n    {\n      \"itemReferenceId\": \"<string>\",\n      \"productUid\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"itemReferenceId\": \"<string>\",\n      \"productUid\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    }\n  ],\n  \"currency\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f9cddb2a-a8b2-4c0a-aac0-e49f2eef3fca",
+              "name": "Quotes for the requested products and recipient.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v4",
+                    "orders:quote"
+                  ],
+                  "host": [
+                    "order",
+                    "gelatoapis",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"orderReferenceId\": \"<string>\",\n  \"customerReferenceId\": \"<string>\",\n  \"recipient\": {\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"companyName\": \"<string>\",\n    \"addressLine1\": \"<string>\",\n    \"addressLine2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postCode\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"products\": [\n    {\n      \"itemReferenceId\": \"<string>\",\n      \"productUid\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"itemReferenceId\": \"<string>\",\n      \"productUid\": \"<string>\",\n      \"quantity\": \"<integer>\"\n    }\n  ],\n  \"currency\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "28736b18-b7f0-41b3-b1f5-b98f52aaf6d1",
+          "name": "Get order",
+          "request": {
+            "name": "Get order",
+            "description": {
+              "content": "Retrieves the full details of a single order by its Gelato order id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "v4",
+                "orders",
+                ":orderId"
+              ],
+              "host": [
+                "order",
+                "gelatoapis",
+                "com"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orderId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c743f79d-7cdd-4747-a04f-78498783a9cb",
+              "name": "The requested order.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v4",
+                    "orders",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "order",
+                    "gelatoapis",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"orderType\": \"string\",\n  \"orderReferenceId\": \"string\",\n  \"customerReferenceId\": \"string\",\n  \"fulfillmentStatus\": \"string\",\n  \"financialStatus\": \"string\",\n  \"currency\": \"string\",\n  \"channel\": \"string\",\n  \"createdAt\": \"2014-11-16T17:23:56.163Z\",\n  \"items\": [\n    {\n      \"itemReferenceId\": \"<string>\",\n      \"productUid\": \"<string>\",\n      \"files\": [\n        {\n          \"type\": \"<string>\",\n          \"url\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"url\": \"<string>\"\n        }\n      ],\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"itemReferenceId\": \"<string>\",\n      \"productUid\": \"<string>\",\n      \"files\": [\n        {\n          \"type\": \"<string>\",\n          \"url\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"url\": \"<string>\"\n        }\n      ],\n      \"quantity\": \"<integer>\"\n    }\n  ],\n  \"shipment\": {\n    \"shipmentMethodUid\": \"string\",\n    \"shipmentMethodName\": \"string\",\n    \"minDeliveryDays\": 1728,\n    \"maxDeliveryDays\": 2061\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "19a82840-c140-4e6d-8195-bfb899048fbf",
+          "name": "Patch draft order",
+          "request": {
+            "name": "Patch draft order",
+            "description": {
+              "content": "Converts a draft order into a regular order. Only orders with orderType equal to draft can be patched.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "v4",
+                "orders",
+                ":orderId"
+              ],
+              "host": [
+                "order",
+                "gelatoapis",
+                "com"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "orderId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"orderType\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c941405c-afe1-4237-ba4b-de83dad6556f",
+              "name": "The patched order.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v4",
+                    "orders",
+                    ":orderId"
+                  ],
+                  "host": [
+                    "order",
+                    "gelatoapis",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "orderId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"orderType\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"orderType\": \"string\",\n  \"orderReferenceId\": \"string\",\n  \"customerReferenceId\": \"string\",\n  \"fulfillmentStatus\": \"string\",\n  \"financialStatus\": \"string\",\n  \"currency\": \"string\",\n  \"channel\": \"string\",\n  \"createdAt\": \"2014-11-16T17:23:56.163Z\",\n  \"items\": [\n    {\n      \"itemReferenceId\": \"<string>\",\n      \"productUid\": \"<string>\",\n      \"files\": [\n        {\n          \"type\": \"<string>\",\n          \"url\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"url\": \"<string>\"\n        }\n      ],\n      \"quantity\": \"<integer>\"\n    },\n    {\n      \"itemReferenceId\": \"<string>\",\n      \"productUid\": \"<string>\",\n      \"files\": [\n        {\n          \"type\": \"<string>\",\n          \"url\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"url\": \"<string>\"\n        }\n      ],\n      \"quantity\": \"<integer>\"\n    }\n  ],\n  \"shipment\": {\n    \"shipmentMethodUid\": \"string\",\n    \"shipmentMethodName\": \"string\",\n    \"minDeliveryDays\": 1728,\n    \"maxDeliveryDays\": 2061\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b0ab1899-91ff-4a98-b907-a06b7889e25f",
+          "name": "Cancel order",
+          "request": {
+            "name": "Cancel order",
+            "description": {
+              "content": "Cancels an order. An order can only be canceled before it moves into production.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "v4",
+                "orders",
+                "{{orderId}}:cancel"
+              ],
+              "host": [
+                "order",
+                "gelatoapis",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "53f254d5-9d77-4e6d-a1e5-65add4c04d84",
+              "name": "The order was canceled.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v4",
+                    "orders",
+                    "{{orderId}}:cancel"
+                  ],
+                  "host": [
+                    "order",
+                    "gelatoapis",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://order.gelatoapis.com",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) ",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "orderId"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-KEY"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "db69e17c-4a12-4463-b292-1c4a86351545",
+    "name": "Gelato Ecommerce Orders API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Specification of the Gelato print-on-demand API. Gelato exposes REST endpoints across dedicated subdomains: Orders (order.gelatoapis.com), Product Catalog and Prices/Stock (product.gelatoapis.com), Shipment (shipment.gelatoapis.com), and Ecommerce store products and templates (ecommerce.gelatoapis.com). All requests must be made over HTTPS and are authenticated with an API key passed in the X-API-KEY header.\n\nContact Support:\n Name: Gelato Support",
+      "type": "text/plain"
+    }
+  }
+}

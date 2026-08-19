@@ -1,0 +1,118 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gelato Ecommerce Product Catalog API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-KEY",
+      "value": "{{X-API-KEY}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Product Catalog",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List catalogs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://order.gelatoapis.com/v3/catalogs"
+          },
+          "docs": "Returns the list of available product catalogs."
+        },
+        {
+          "info": {
+            "name": "Get catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://order.gelatoapis.com/v3/catalogs/:catalogUid",
+            "params": [
+              {
+                "name": "catalogUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a single catalog including the product attributes and their possible values used to filter products."
+        },
+        {
+          "info": {
+            "name": "Search products",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://order.gelatoapis.com/v3/catalogs/:catalogUid/products:search",
+            "params": [
+              {
+                "name": "catalogUid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Searches for products within a catalog, filtered by product attributes, with pagination."
+        },
+        {
+          "info": {
+            "name": "Get product",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://order.gelatoapis.com/v3/products/:productUid",
+            "params": [
+              {
+                "name": "productUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the details of a single product by its product UID."
+        },
+        {
+          "info": {
+            "name": "Cover dimensions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://order.gelatoapis.com/v3/products/:productUid/cover-dimensions",
+            "params": [
+              {
+                "name": "productUid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "pageCount",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the dimensions of the cover of a multi-page product such as a photo book or brochure, given the number of pages."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

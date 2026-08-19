@@ -1,0 +1,44 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gelato Ecommerce Shipment API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-KEY",
+      "value": "{{X-API-KEY}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Shipment",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Shipment methods",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://order.gelatoapis.com/v1/shipment-methods",
+            "params": [
+              {
+                "name": "country",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the shipment methods Gelato provides, optionally filtered by destination country."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

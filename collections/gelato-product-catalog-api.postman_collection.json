@@ -1,0 +1,569 @@
+{
+  "item": [
+    {
+      "id": "0557900b-d102-4542-ac69-7f35dfe2c27e",
+      "name": "Product Catalog",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "89b4f8aa-1a59-42b5-a4dd-848b83d096a6",
+          "name": "List catalogs",
+          "request": {
+            "name": "List catalogs",
+            "description": {
+              "content": "Returns the list of available product catalogs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "v3",
+                "catalogs"
+              ],
+              "host": [
+                "product",
+                "gelatoapis",
+                "com"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "828737b1-ec67-4bc8-bd19-fe76baf40486",
+              "name": "A list of catalogs.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v3",
+                    "catalogs"
+                  ],
+                  "host": [
+                    "product",
+                    "gelatoapis",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"catalogUid\": \"string\",\n    \"title\": \"string\",\n    \"productAttributes\": [\n      {\n        \"productAttributeUid\": \"string\",\n        \"title\": \"string\",\n        \"values\": [\n          {\n            \"productAttributeValueUid\": \"string\",\n            \"title\": \"string\"\n          },\n          {\n            \"productAttributeValueUid\": \"string\",\n            \"title\": \"string\"\n          }\n        ]\n      },\n      {\n        \"productAttributeUid\": \"string\",\n        \"title\": \"string\",\n        \"values\": [\n          {\n            \"productAttributeValueUid\": \"string\",\n            \"title\": \"string\"\n          },\n          {\n            \"productAttributeValueUid\": \"string\",\n            \"title\": \"string\"\n          }\n        ]\n      }\n    ]\n  },\n  {\n    \"catalogUid\": \"string\",\n    \"title\": \"string\",\n    \"productAttributes\": [\n      {\n        \"productAttributeUid\": \"string\",\n        \"title\": \"string\",\n        \"values\": [\n          {\n            \"productAttributeValueUid\": \"string\",\n            \"title\": \"string\"\n          },\n          {\n            \"productAttributeValueUid\": \"string\",\n            \"title\": \"string\"\n          }\n        ]\n      },\n      {\n        \"productAttributeUid\": \"string\",\n        \"title\": \"string\",\n        \"values\": [\n          {\n            \"productAttributeValueUid\": \"string\",\n            \"title\": \"string\"\n          },\n          {\n            \"productAttributeValueUid\": \"string\",\n            \"title\": \"string\"\n          }\n        ]\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "04eb8fac-5dad-4d01-9235-4e61f05466d5",
+          "name": "Get catalog",
+          "request": {
+            "name": "Get catalog",
+            "description": {
+              "content": "Returns a single catalog including the product attributes and their possible values used to filter products.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "v3",
+                "catalogs",
+                ":catalogUid"
+              ],
+              "host": [
+                "product",
+                "gelatoapis",
+                "com"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "catalogUid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0d5a818d-4042-440b-a655-76e9c79cde3a",
+              "name": "The requested catalog.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v3",
+                    "catalogs",
+                    ":catalogUid"
+                  ],
+                  "host": [
+                    "product",
+                    "gelatoapis",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalogUid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"catalogUid\": \"string\",\n  \"title\": \"string\",\n  \"productAttributes\": [\n    {\n      \"productAttributeUid\": \"string\",\n      \"title\": \"string\",\n      \"values\": [\n        {\n          \"productAttributeValueUid\": \"string\",\n          \"title\": \"string\"\n        },\n        {\n          \"productAttributeValueUid\": \"string\",\n          \"title\": \"string\"\n        }\n      ]\n    },\n    {\n      \"productAttributeUid\": \"string\",\n      \"title\": \"string\",\n      \"values\": [\n        {\n          \"productAttributeValueUid\": \"string\",\n          \"title\": \"string\"\n        },\n        {\n          \"productAttributeValueUid\": \"string\",\n          \"title\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d6839f11-6bb2-4b6a-a4d0-ade441cc23b4",
+          "name": "Search products",
+          "request": {
+            "name": "Search products",
+            "description": {
+              "content": "Searches for products within a catalog, filtered by product attributes, with pagination.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "v3",
+                "catalogs",
+                ":catalogUid",
+                "products:search"
+              ],
+              "host": [
+                "product",
+                "gelatoapis",
+                "com"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "catalogUid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"attributeFilters\": {\n    \"key_0\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"key_1\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"limit\": \"<integer>\",\n  \"offset\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ef89e6ac-cbc4-4524-89c0-c5ad3a72b7ce",
+              "name": "Matching products in the catalog.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v3",
+                    "catalogs",
+                    ":catalogUid",
+                    "products:search"
+                  ],
+                  "host": [
+                    "product",
+                    "gelatoapis",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "catalogUid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"attributeFilters\": {\n    \"key_0\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"key_1\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"key_2\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"limit\": \"<integer>\",\n  \"offset\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ac78af58-61c5-4dfe-a109-c6fb29847a5d",
+          "name": "Get product",
+          "request": {
+            "name": "Get product",
+            "description": {
+              "content": "Returns the details of a single product by its product UID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "v3",
+                "products",
+                ":productUid"
+              ],
+              "host": [
+                "product",
+                "gelatoapis",
+                "com"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "productUid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2d6c0efa-f8f8-4528-8d83-0a39c21f14f4",
+              "name": "The requested product.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v3",
+                    "products",
+                    ":productUid"
+                  ],
+                  "host": [
+                    "product",
+                    "gelatoapis",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productUid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"productUid\": \"string\",\n  \"attributes\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"weight\": {\n    \"value\": 214.65579410703816,\n    \"measureUnit\": \"string\"\n  },\n  \"dimensions\": {\n    \"key_0\": {\n      \"value\": 4303.504728859993,\n      \"measureUnit\": \"string\"\n    },\n    \"key_1\": {\n      \"value\": 3997.379407734596,\n      \"measureUnit\": \"string\"\n    }\n  },\n  \"supportedCountries\": [\n    \"string\",\n    \"string\"\n  ],\n  \"notSupportedCountries\": [\n    \"string\",\n    \"string\"\n  ],\n  \"isStockable\": true,\n  \"isPrintable\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b48b9660-bcd0-45f0-9ae0-e5c9980b9630",
+          "name": "Cover dimensions",
+          "request": {
+            "name": "Cover dimensions",
+            "description": {
+              "content": "Returns the dimensions of the cover of a multi-page product such as a photo book or brochure, given the number of pages.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "v3",
+                "products",
+                ":productUid",
+                "cover-dimensions"
+              ],
+              "host": [
+                "product",
+                "gelatoapis",
+                "com"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageCount",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "productUid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a7b02074-3b59-4eb1-bf6e-5b12a8507ebf",
+              "name": "The cover dimensions for the product.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v3",
+                    "products",
+                    ":productUid",
+                    "cover-dimensions"
+                  ],
+                  "host": [
+                    "product",
+                    "gelatoapis",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageCount",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "productUid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://order.gelatoapis.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-KEY"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3e3fd8ad-9f02-4018-93ec-0bba5ed53f94",
+    "name": "Gelato Ecommerce Product Catalog API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Specification of the Gelato print-on-demand API. Gelato exposes REST endpoints across dedicated subdomains: Orders (order.gelatoapis.com), Product Catalog and Prices/Stock (product.gelatoapis.com), Shipment (shipment.gelatoapis.com), and Ecommerce store products and templates (ecommerce.gelatoapis.com). All requests must be made over HTTPS and are authenticated with an API key passed in the X-API-KEY header.\n\nContact Support:\n Name: Gelato Support",
+      "type": "text/plain"
+    }
+  }
+}

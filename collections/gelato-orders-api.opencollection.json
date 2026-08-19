@@ -1,0 +1,129 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gelato Ecommerce Orders API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-KEY",
+      "value": "{{X-API-KEY}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://order.gelatoapis.com/v4/orders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new order for fulfillment. Supports order and draft order types, with one or more items, recipient details, and optional shipment method."
+        },
+        {
+          "info": {
+            "name": "Search orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://order.gelatoapis.com/v4/orders:search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Searches orders by criteria such as channels, countries, currencies, financial and fulfillment statuses, order types, and date range, with pagination."
+        },
+        {
+          "info": {
+            "name": "Quote order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://order.gelatoapis.com/v4/orders:quote",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns one or more quotes for a set of products to a given recipient, including available shipment methods and prices, before an order is placed."
+        },
+        {
+          "info": {
+            "name": "Get order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://order.gelatoapis.com/v4/orders/:orderId",
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves the full details of a single order by its Gelato order id."
+        },
+        {
+          "info": {
+            "name": "Patch draft order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://order.gelatoapis.com/v4/orders/:orderId",
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Converts a draft order into a regular order. Only orders with orderType equal to draft can be patched."
+        },
+        {
+          "info": {
+            "name": "Cancel order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://order.gelatoapis.com/v4/orders/:orderId:cancel",
+            "params": [
+              {
+                "name": "orderId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Cancels an order. An order can only be canceled before it moves into production."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

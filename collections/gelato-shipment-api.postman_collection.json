@@ -1,0 +1,146 @@
+{
+  "item": [
+    {
+      "id": "39aff4df-8507-4549-8b3c-f2936c5bfb6a",
+      "name": "Shipment",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9e675bec-21e5-4ab2-a29c-582eed5c3940",
+          "name": "Shipment methods",
+          "request": {
+            "name": "Shipment methods",
+            "description": {
+              "content": "Returns the shipment methods Gelato provides, optionally filtered by destination country.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "v1",
+                "shipment-methods"
+              ],
+              "host": [
+                "shipment",
+                "gelatoapis",
+                "com"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "country",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2f652a16-73fd-48e0-90d0-83e10c0dfad7",
+              "name": "The available shipment methods.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "v1",
+                    "shipment-methods"
+                  ],
+                  "host": [
+                    "shipment",
+                    "gelatoapis",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "country",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-KEY",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"shipmentMethods\": [\n    {\n      \"shipmentMethodUid\": \"string\",\n      \"type\": \"string\",\n      \"name\": \"string\",\n      \"isBusiness\": false,\n      \"isPrivate\": true,\n      \"hasTracking\": false,\n      \"supportedCountries\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"shipmentMethodUid\": \"string\",\n      \"type\": \"string\",\n      \"name\": \"string\",\n      \"isBusiness\": false,\n      \"isPrivate\": true,\n      \"hasTracking\": true,\n      \"supportedCountries\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://order.gelatoapis.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-KEY"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e9ce8449-a62a-41d0-bfe7-27f3b98a8d23",
+    "name": "Gelato Ecommerce Shipment API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Specification of the Gelato print-on-demand API. Gelato exposes REST endpoints across dedicated subdomains: Orders (order.gelatoapis.com), Product Catalog and Prices/Stock (product.gelatoapis.com), Shipment (shipment.gelatoapis.com), and Ecommerce store products and templates (ecommerce.gelatoapis.com). All requests must be made over HTTPS and are authenticated with an API key passed in the X-API-KEY header.\n\nContact Support:\n Name: Gelato Support",
+      "type": "text/plain"
+    }
+  }
+}
