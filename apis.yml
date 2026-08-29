@@ -7,6 +7,18 @@ description: Gelato operates a global, distributed print-on-demand production ne
   The Gelato API exposes REST endpoints across dedicated subdomains for orders,
   the product catalog, pricing and stock, shipment methods, ecommerce store
   products and templates, plus webhooks - all authenticated with an X-API-KEY header.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
