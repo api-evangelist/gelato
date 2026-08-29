@@ -1,0 +1,24 @@
+slug: gelato
+provider: Gelato
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Transportation & Logistics
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Orders
+  spec_file: gelato-orders-api-openapi.yml
+  capability_id: BC-520.40
+  capability_id_l1: BC-520
+  capability_name: Order Fulfilment Management
+  confidence: 0.75
+  evidence: POST /v4/orders  createOrder; POST /v4/orders:quote  quoteOrder; POST /v4/orders/{orderId}:cancel  cancelOrder
+  reason: Order creation, quoting, search and cancellation against a print-on-demand production and fulfilment
+    network — order fulfilment orchestration. Some overlap with sales order capture.

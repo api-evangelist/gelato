@@ -258,6 +258,9 @@ apis:
   - type: APIReference
     url: https://dashboard.gelato.com/docs/webhooks/
 common:
+- type: CapabilityMap
+  url: capabilities/gelato-capability-edges.yml
+  name: Gelato Business Capability Map
 - type: AgenticAccess
   url: agentic-access/gelato-agentic-access.yml
 - type: VulnerabilityDisclosure
