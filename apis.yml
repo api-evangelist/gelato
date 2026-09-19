@@ -230,6 +230,8 @@ apis:
   humanURL: https://dashboard.gelato.com/docs/orders/
   baseURL: https://order.gelatoapis.com
   tags:
+  - Stocks
+  tags_raw:
   - Stock
   properties:
   - type: OpenAPI
