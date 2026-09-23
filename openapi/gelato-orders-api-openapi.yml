@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Gelato Ecommerce Orders API
+  title: Gelato Orders API
   description: 'Specification of the Gelato print-on-demand API. Gelato exposes REST endpoints across dedicated subdomains: Orders (order.gelatoapis.com), Product Catalog and Prices/Stock (product.gelatoapis.com), Shipment (shipment.gelatoapis.com), and Ecommerce store products and templates (ecommerce.gelatoapis.com). All requests must be made over HTTPS and are authenticated with an API key passed in the X-API-KEY header.'
   termsOfService: https://www.gelato.com/legal
   contact:
@@ -168,43 +168,81 @@ paths:
           description: The order was canceled.
 components:
   schemas:
-    Order:
+    CreateOrderRequest:
       type: object
+      required:
+      - orderReferenceId
+      - customerReferenceId
+      - items
+      - shippingAddress
       properties:
-        id:
-          type: string
         orderType:
           type: string
+          enum:
+          - order
+          - draft
+          default: order
         orderReferenceId:
           type: string
+          description: Your internal order id.
         customerReferenceId:
           type: string
-        fulfillmentStatus:
-          type: string
-        financialStatus:
-          type: string
+          description: Your internal customer id.
         currency:
           type: string
-        channel:
-          type: string
-        createdAt:
-          type: string
-          format: date-time
         items:
           type: array
           items:
             $ref: '#/components/schemas/OrderItem'
-        shipment:
-          type: object
-          properties:
-            shipmentMethodUid:
-              type: string
-            shipmentMethodName:
-              type: string
-            minDeliveryDays:
-              type: integer
-            maxDeliveryDays:
-              type: integer
+        shipmentMethodUid:
+          type: string
+        shippingAddress:
+          $ref: '#/components/schemas/ShippingAddress'
+    OrderItem:
+      type: object
+      properties:
+        itemReferenceId:
+          type: string
+        productUid:
+          type: string
+        files:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              url:
+                type: string
+        quantity:
+          type: integer
+    QuoteOrderRequest:
+      type: object
+      required:
+      - orderReferenceId
+      - customerReferenceId
+      - recipient
+      - products
+      properties:
+        orderReferenceId:
+          type: string
+        customerReferenceId:
+          type: string
+        currency:
+          type: string
+        recipient:
+          $ref: '#/components/schemas/ShippingAddress'
+        products:
+          type: array
+          items:
+            type: object
+            properties:
+              itemReferenceId:
+                type: string
+              productUid:
+                type: string
+              quantity:
+                type: integer
     SearchOrdersRequest:
       type: object
       properties:
@@ -246,41 +284,48 @@ components:
       type: object
       properties:
         code:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         message:
           type: string
-          nullable: false
-    CreateOrderRequest:
+    Order:
       type: object
-      required:
-      - orderReferenceId
-      - customerReferenceId
-      - items
-      - shippingAddress
       properties:
+        id:
+          type: string
         orderType:
           type: string
-          enum:
-          - order
-          - draft
-          default: order
         orderReferenceId:
           type: string
-          description: Your internal order id.
         customerReferenceId:
           type: string
-          description: Your internal customer id.
+        fulfillmentStatus:
+          type: string
+        financialStatus:
+          type: string
         currency:
           type: string
+        channel:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
         items:
           type: array
           items:
             $ref: '#/components/schemas/OrderItem'
-        shipmentMethodUid:
-          type: string
-        shippingAddress:
-          $ref: '#/components/schemas/ShippingAddress'
+        shipment:
+          type: object
+          properties:
+            shipmentMethodUid:
+              type: string
+            shipmentMethodName:
+              type: string
+            minDeliveryDays:
+              type: integer
+            maxDeliveryDays:
+              type: integer
     ShippingAddress:
       type: object
       properties:
@@ -307,51 +352,6 @@ components:
           type: string
         phone:
           type: string
-    QuoteOrderRequest:
-      type: object
-      required:
-      - orderReferenceId
-      - customerReferenceId
-      - recipient
-      - products
-      properties:
-        orderReferenceId:
-          type: string
-        customerReferenceId:
-          type: string
-        currency:
-          type: string
-        recipient:
-          $ref: '#/components/schemas/ShippingAddress'
-        products:
-          type: array
-          items:
-            type: object
-            properties:
-              itemReferenceId:
-                type: string
-              productUid:
-                type: string
-              quantity:
-                type: integer
-    OrderItem:
-      type: object
-      properties:
-        itemReferenceId:
-          type: string
-        productUid:
-          type: string
-        files:
-          type: array
-          items:
-            type: object
-            properties:
-              type:
-                type: string
-              url:
-                type: string
-        quantity:
-          type: integer
   securitySchemes:
     api_key:
       type: apiKey
