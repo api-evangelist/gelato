@@ -168,6 +168,15 @@ paths:
           description: The order was canceled.
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type:
+          - string
+          - 'null'
+        message:
+          type: string
     CreateOrderRequest:
       type: object
       required:
@@ -198,41 +207,6 @@ components:
           type: string
         shippingAddress:
           $ref: '#/components/schemas/ShippingAddress'
-    Error:
-      type: object
-      properties:
-        code:
-          type:
-          - string
-          - 'null'
-        message:
-          type: string
-    ShippingAddress:
-      type: object
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        companyName:
-          type: string
-        addressLine1:
-          type: string
-        addressLine2:
-          type: string
-        city:
-          type: string
-        postCode:
-          type: string
-        state:
-          type: string
-        country:
-          type: string
-          description: Two-character ISO country code.
-        email:
-          type: string
-        phone:
-          type: string
     SearchOrdersRequest:
       type: object
       properties:
@@ -269,51 +243,6 @@ components:
         limit:
           type: integer
         offset:
-          type: integer
-    QuoteOrderRequest:
-      type: object
-      required:
-      - orderReferenceId
-      - customerReferenceId
-      - recipient
-      - products
-      properties:
-        orderReferenceId:
-          type: string
-        customerReferenceId:
-          type: string
-        currency:
-          type: string
-        recipient:
-          $ref: '#/components/schemas/ShippingAddress'
-        products:
-          type: array
-          items:
-            type: object
-            properties:
-              itemReferenceId:
-                type: string
-              productUid:
-                type: string
-              quantity:
-                type: integer
-    OrderItem:
-      type: object
-      properties:
-        itemReferenceId:
-          type: string
-        productUid:
-          type: string
-        files:
-          type: array
-          items:
-            type: object
-            properties:
-              type:
-                type: string
-              url:
-                type: string
-        quantity:
           type: integer
     Order:
       type: object
@@ -352,6 +281,77 @@ components:
               type: integer
             maxDeliveryDays:
               type: integer
+    ShippingAddress:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        companyName:
+          type: string
+        addressLine1:
+          type: string
+        addressLine2:
+          type: string
+        city:
+          type: string
+        postCode:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+          description: Two-character ISO country code.
+        email:
+          type: string
+        phone:
+          type: string
+    OrderItem:
+      type: object
+      properties:
+        itemReferenceId:
+          type: string
+        productUid:
+          type: string
+        files:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                type: string
+              url:
+                type: string
+        quantity:
+          type: integer
+    QuoteOrderRequest:
+      type: object
+      required:
+      - orderReferenceId
+      - customerReferenceId
+      - recipient
+      - products
+      properties:
+        orderReferenceId:
+          type: string
+        customerReferenceId:
+          type: string
+        currency:
+          type: string
+        recipient:
+          $ref: '#/components/schemas/ShippingAddress'
+        products:
+          type: array
+          items:
+            type: object
+            properties:
+              itemReferenceId:
+                type: string
+              productUid:
+                type: string
+              quantity:
+                type: integer
   securitySchemes:
     api_key:
       type: apiKey

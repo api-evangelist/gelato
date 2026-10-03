@@ -143,6 +143,31 @@ paths:
           description: The cover dimensions for the product.
 components:
   schemas:
+    Catalog:
+      type: object
+      properties:
+        catalogUid:
+          type: string
+        title:
+          type: string
+        productAttributes:
+          type: array
+          items:
+            type: object
+            properties:
+              productAttributeUid:
+                type: string
+              title:
+                type: string
+              values:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    productAttributeValueUid:
+                      type: string
+                    title:
+                      type: string
     Product:
       type: object
       properties:
@@ -180,31 +205,6 @@ components:
           type: boolean
         isPrintable:
           type: boolean
-    Catalog:
-      type: object
-      properties:
-        catalogUid:
-          type: string
-        title:
-          type: string
-        productAttributes:
-          type: array
-          items:
-            type: object
-            properties:
-              productAttributeUid:
-                type: string
-              title:
-                type: string
-              values:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    productAttributeValueUid:
-                      type: string
-                    title:
-                      type: string
   securitySchemes:
     api_key:
       type: apiKey
