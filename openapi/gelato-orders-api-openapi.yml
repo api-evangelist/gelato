@@ -168,81 +168,23 @@ paths:
           description: The order was canceled.
 components:
   schemas:
-    Error:
+    OrderItem:
       type: object
       properties:
-        code:
-          type:
-          - string
-          - 'null'
-        message:
+        itemReferenceId:
           type: string
-    CreateOrderRequest:
-      type: object
-      required:
-      - orderReferenceId
-      - customerReferenceId
-      - items
-      - shippingAddress
-      properties:
-        orderType:
+        productUid:
           type: string
-          enum:
-          - order
-          - draft
-          default: order
-        orderReferenceId:
-          type: string
-          description: Your internal order id.
-        customerReferenceId:
-          type: string
-          description: Your internal customer id.
-        currency:
-          type: string
-        items:
+        files:
           type: array
           items:
-            $ref: '#/components/schemas/OrderItem'
-        shipmentMethodUid:
-          type: string
-        shippingAddress:
-          $ref: '#/components/schemas/ShippingAddress'
-    SearchOrdersRequest:
-      type: object
-      properties:
-        channels:
-          type: array
-          items:
-            type: string
-        countries:
-          type: array
-          items:
-            type: string
-        currencies:
-          type: array
-          items:
-            type: string
-        financialStatuses:
-          type: array
-          items:
-            type: string
-        fulfillmentStatuses:
-          type: array
-          items:
-            type: string
-        orderTypes:
-          type: array
-          items:
-            type: string
-        startDate:
-          type: string
-          format: date-time
-        endDate:
-          type: string
-          format: date-time
-        limit:
-          type: integer
-        offset:
+            type: object
+            properties:
+              type:
+                type: string
+              url:
+                type: string
+        quantity:
           type: integer
     Order:
       type: object
@@ -281,50 +223,6 @@ components:
               type: integer
             maxDeliveryDays:
               type: integer
-    ShippingAddress:
-      type: object
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        companyName:
-          type: string
-        addressLine1:
-          type: string
-        addressLine2:
-          type: string
-        city:
-          type: string
-        postCode:
-          type: string
-        state:
-          type: string
-        country:
-          type: string
-          description: Two-character ISO country code.
-        email:
-          type: string
-        phone:
-          type: string
-    OrderItem:
-      type: object
-      properties:
-        itemReferenceId:
-          type: string
-        productUid:
-          type: string
-        files:
-          type: array
-          items:
-            type: object
-            properties:
-              type:
-                type: string
-              url:
-                type: string
-        quantity:
-          type: integer
     QuoteOrderRequest:
       type: object
       required:
@@ -352,6 +250,108 @@ components:
                 type: string
               quantity:
                 type: integer
+    CreateOrderRequest:
+      type: object
+      required:
+      - orderReferenceId
+      - customerReferenceId
+      - items
+      - shippingAddress
+      properties:
+        orderType:
+          type: string
+          enum:
+          - order
+          - draft
+          default: order
+        orderReferenceId:
+          type: string
+          description: Your internal order id.
+        customerReferenceId:
+          type: string
+          description: Your internal customer id.
+        currency:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
+        shipmentMethodUid:
+          type: string
+        shippingAddress:
+          $ref: '#/components/schemas/ShippingAddress'
+    ShippingAddress:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        companyName:
+          type: string
+        addressLine1:
+          type: string
+        addressLine2:
+          type: string
+        city:
+          type: string
+        postCode:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+          description: Two-character ISO country code.
+        email:
+          type: string
+        phone:
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type:
+          - string
+          - 'null'
+        message:
+          type: string
+    SearchOrdersRequest:
+      type: object
+      properties:
+        channels:
+          type: array
+          items:
+            type: string
+        countries:
+          type: array
+          items:
+            type: string
+        currencies:
+          type: array
+          items:
+            type: string
+        financialStatuses:
+          type: array
+          items:
+            type: string
+        fulfillmentStatuses:
+          type: array
+          items:
+            type: string
+        orderTypes:
+          type: array
+          items:
+            type: string
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        limit:
+          type: integer
+        offset:
+          type: integer
   securitySchemes:
     api_key:
       type: apiKey
