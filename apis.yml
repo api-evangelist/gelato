@@ -47,7 +47,7 @@ tags_raw:
 - Distributed Production
 - Orders
 created: '2026-06-25'
-modified: '2026-06-25'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: gelato:gelato-ecommerce-api
@@ -261,6 +261,8 @@ apis:
   - type: APIReference
     url: https://dashboard.gelato.com/docs/webhooks/
 common:
+- url: https://www.gelato.com/news
+  type: Blog
 - type: CapabilityMap
   url: capabilities/gelato-capability-edges.yml
   name: Gelato Business Capability Map
