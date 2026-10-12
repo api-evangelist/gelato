@@ -1,0 +1,32 @@
+generated: '2026-10-12'
+method: searched
+source:
+- https://composio.dev/toolkits/gelato
+checked:
+- https://composio.dev/toolkits/gelato
+- https://monid.ai/tools/gelato
+- https://n8n.io/integrations/gelato/
+- https://zapier.com/apps/gelato/integrations
+summary: null
+marketplace_apps:
+- marketplace: composio
+  channel: agent-gateway
+  app: gelato
+  url: https://composio.dev/toolkits/gelato
+  identity: action-prefix
+  actions:
+  - key: GELATO_CANCEL_ORDER
+  - key: GELATO_CHECK_STOCK_AVAILABILITY
+  - key: GELATO_CREATE_DRAFT_ORDER
+  - key: GELATO_CREATE_ORDER
+  - key: GELATO_DELETE_DRAFT_ORDER
+  - key: GELATO_GET_CATALOGS
+  - key: GELATO_GET_ORDER
+  - key: GELATO_GET_PRODUCT
+  - key: GELATO_GET_PRODUCT_PRICES
+  - key: GELATO_QUOTE_ORDER
+  - key: GELATO_SEARCH_ORDERS
+  - key: GELATO_SEARCH_PRODUCTS
+  - key: GELATO_SUBMIT_DRAFT_ORDER
+edges: []
+templates: []
