@@ -168,6 +168,15 @@ paths:
           description: The order was canceled.
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type:
+          - string
+          - 'null'
+        message:
+          type: string
     OrderItem:
       type: object
       properties:
@@ -186,6 +195,59 @@ components:
                 type: string
         quantity:
           type: integer
+    ShippingAddress:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        companyName:
+          type: string
+        addressLine1:
+          type: string
+        addressLine2:
+          type: string
+        city:
+          type: string
+        postCode:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+          description: Two-character ISO country code.
+        email:
+          type: string
+        phone:
+          type: string
+    QuoteOrderRequest:
+      type: object
+      required:
+      - orderReferenceId
+      - customerReferenceId
+      - recipient
+      - products
+      properties:
+        orderReferenceId:
+          type: string
+        customerReferenceId:
+          type: string
+        currency:
+          type: string
+        recipient:
+          $ref: '#/components/schemas/ShippingAddress'
+        products:
+          type: array
+          items:
+            type: object
+            properties:
+              itemReferenceId:
+                type: string
+              productUid:
+                type: string
+              quantity:
+                type: integer
     Order:
       type: object
       properties:
@@ -223,33 +285,6 @@ components:
               type: integer
             maxDeliveryDays:
               type: integer
-    QuoteOrderRequest:
-      type: object
-      required:
-      - orderReferenceId
-      - customerReferenceId
-      - recipient
-      - products
-      properties:
-        orderReferenceId:
-          type: string
-        customerReferenceId:
-          type: string
-        currency:
-          type: string
-        recipient:
-          $ref: '#/components/schemas/ShippingAddress'
-        products:
-          type: array
-          items:
-            type: object
-            properties:
-              itemReferenceId:
-                type: string
-              productUid:
-                type: string
-              quantity:
-                type: integer
     CreateOrderRequest:
       type: object
       required:
@@ -280,41 +315,6 @@ components:
           type: string
         shippingAddress:
           $ref: '#/components/schemas/ShippingAddress'
-    ShippingAddress:
-      type: object
-      properties:
-        firstName:
-          type: string
-        lastName:
-          type: string
-        companyName:
-          type: string
-        addressLine1:
-          type: string
-        addressLine2:
-          type: string
-        city:
-          type: string
-        postCode:
-          type: string
-        state:
-          type: string
-        country:
-          type: string
-          description: Two-character ISO country code.
-        email:
-          type: string
-        phone:
-          type: string
-    Error:
-      type: object
-      properties:
-        code:
-          type:
-          - string
-          - 'null'
-        message:
-          type: string
     SearchOrdersRequest:
       type: object
       properties:
