@@ -7,6 +7,7 @@ checked:
 - https://monid.ai/tools/gelato
 - https://n8n.io/integrations/gelato/
 - https://zapier.com/apps/gelato/integrations
+- bigcommerce/integrations/bigcommerce-integration-edges.yml
 summary: null
 marketplace_apps:
 - marketplace: composio
@@ -28,5 +29,22 @@ marketplace_apps:
   - key: GELATO_SEARCH_ORDERS
   - key: GELATO_SEARCH_PRODUCTS
   - key: GELATO_SUBMIT_DRAFT_ORDER
-edges: []
+edges:
+- partner_name: BigCommerce (own)
+  partner: bigcommerce
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://www.bigcommerce.com/apps/gelato/
+  mirror_of: bigcommerce/integrations/bigcommerce-integration-edges.yml
+  apps:
+  - Gelato
+  listing_count: 1
+  detected: '2026-10-20'
+  detected_by: mirror-platform-listings.py
+  category: Product Sourcing, Printing & Products-On-Demand
 templates: []
