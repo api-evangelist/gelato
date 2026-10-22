@@ -8,6 +8,7 @@ checked:
 - https://n8n.io/integrations/gelato/
 - https://zapier.com/apps/gelato/integrations
 - bigcommerce/integrations/bigcommerce-integration-edges.yml
+- wix/integrations/wix-integration-edges.yml
 summary: null
 marketplace_apps:
 - marketplace: composio
@@ -47,4 +48,24 @@ edges:
   detected: '2026-10-20'
   detected_by: mirror-platform-listings.py
   category: Product Sourcing, Printing & Products-On-Demand
+- partner_name: Wix (own)
+  partner: wix
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://www.wix.com/app-market/developer/gelato
+  mirror_of: wix/integrations/wix-integration-edges.yml
+  apps:
+  - 'Gelato: Print on Demand'
+  - Partners Storefronts
+  listing_count: 1
+  detected: '2026-10-22'
+  detected_by: mirror-platform-listings.py
+  category: Print on Demand
+  badges:
+  - SELF_PUBLISHED
 templates: []
