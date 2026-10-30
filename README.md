@@ -1,4 +1,4 @@
-# Gelato (gelato)
+# Gelato
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,159 +66,126 @@
 
 Gelato operates a global, distributed print-on-demand production network that lets ecommerce sellers produce and ship products locally in 30+ countries. The Gelato API exposes REST endpoints across dedicated subdomains for orders, the product catalog, pricing and stock, shipment methods, ecommerce store products and templates, plus webhooks - all authenticated with an X-API-KEY header.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/gelato/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/gelato/refs/heads/main/apis.yml)
+**Areas:** Print on Demand · E-Commerce · Fulfillment · Distributed Production · Order
 
-## Tags
+## Gelato on APIs.io
 
-- Print on Demand
-- Ecommerce
-- Fulfillment
-- Distributed Production
-- Orders
+Everything profiled for Gelato is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/gelato/](https://apis.io/providers/gelato/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (6)
 
-- **Created:** 2026-06-25
-- **Modified:** 2026-06-25
+- [Gelato Ecommerce API](https://apis.io/apis/gelato/gelato-ecommerce-api/) — The Ecommerce API from Gelato — 4 operation(s) for ecommerce.
+- [Gelato Orders API](https://apis.io/apis/gelato/gelato-orders-api/) — The Orders API from Gelato — 5 operation(s) for orders.
+- [Gelato Prices API](https://apis.io/apis/gelato/gelato-prices-api/) — The Prices API from Gelato — 1 operation(s) for prices.
+- [Gelato Product Catalog API](https://apis.io/apis/gelato/gelato-product-catalog-api/) — The Product Catalog API from Gelato — 5 operation(s) for product catalog.
+- [Gelato Shipment API](https://apis.io/apis/gelato/gelato-shipment-api/) — The Shipment API from Gelato — 1 operation(s) for shipment.
+- [Gelato Stock API](https://apis.io/apis/gelato/gelato-stock-api/) — The Stock API from Gelato — 1 operation(s) for stock.
 
-## APIs
+### Published properties
 
-### Gelato Orders API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Create, retrieve, search, patch (draft to order), quote, and cancel print-on-demand orders for fulfillment through Gelato's global production network, using the v4 Orders endpoints under order.gelatoapis.com.
+#### Agentic access (1)
 
-- **Human URL:** [https://dashboard.gelato.com/docs/orders/](https://dashboard.gelato.com/docs/orders/)
-- **Base URL:** `https://order.gelatoapis.com`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Gelato Agentic Access](https://apis.io/agentic-access/gelato/gelato-agentic-access/)
 
-- Orders
-- Fulfillment
-- Print on Demand
+#### Collections (7)
 
-#### Properties
+Postman and Open Collection request collections.
 
-- [Documentation](https://dashboard.gelato.com/docs/orders/)
-- [API Reference](https://dashboard.gelato.com/docs/orders/v4/create/)
-- [OpenAPI](openapi/gelato-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/gelato.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/gelato.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Gelato API](https://apis.io/collections/gelato/open-gelato/)
+- [Gelato Ecommerce API](https://apis.io/collections/gelato/open-gelato-ecommerce-api/)
+- [Gelato Ecommerce Orders API](https://apis.io/collections/gelato/open-gelato-orders-api/)
+- [Gelato Ecommerce Prices API](https://apis.io/collections/gelato/open-gelato-prices-api/)
+- [Gelato Ecommerce Product Catalog API](https://apis.io/collections/gelato/open-gelato-product-catalog-api/)
+- [Gelato Ecommerce Shipment API](https://apis.io/collections/gelato/open-gelato-shipment-api/)
+- [Gelato Ecommerce Stock API](https://apis.io/collections/gelato/open-gelato-stock-api/)
 
-### Gelato Product Catalog API
+#### Security (3)
 
-List and retrieve product catalogs, search products within a catalog, and fetch individual product and cover-dimension details from the v3 Product Catalog endpoints under product.gelatoapis.com.
+Authentication, trust centre, and vulnerability disclosure.
 
-- **Human URL:** [https://dashboard.gelato.com/docs/products/](https://dashboard.gelato.com/docs/products/)
-- **Base URL:** `https://product.gelatoapis.com`
+- [Gelato Authentication](https://apis.io/security/gelato/gelato-authentication/)
+- [Gelato Domain Security](https://apis.io/security/gelato/gelato-domain-security/)
+- [Gelato Vulnerability Disclosure](https://apis.io/security/gelato/gelato-vulnerability-disclosure/)
 
-#### Tags
+#### Plans and pricing (1)
 
-- Product Catalog
-- Catalogs
-- Products
+Published plans, tiers and prices.
 
-#### Properties
+- [Gelato Plans Pricing](https://apis.io/plans/gelato/gelato-plans-pricing/)
 
-- [Documentation](https://dashboard.gelato.com/docs/products/)
-- [API Reference](https://dashboard.gelato.com/docs/products/catalog/list/)
-- [OpenAPI](openapi/gelato-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/gelato.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/gelato.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Rate limits (1)
 
-### Gelato Prices and Stock API
+Published request limits.
 
-Retrieve quantity-based prices for a product and check regional stock availability for stock-able products via the v3 prices and stock endpoints under product.gelatoapis.com.
+- [Gelato Rate Limits](https://apis.io/rate-limits/gelato/gelato-rate-limits/)
 
-- **Human URL:** [https://dashboard.gelato.com/docs/products/prices/](https://dashboard.gelato.com/docs/products/prices/)
-- **Base URL:** `https://product.gelatoapis.com`
+#### FinOps (1)
 
-#### Tags
+What the API costs to run, by operation.
 
-- Prices
-- Stock
-- Availability
+- [Gelato Finops](https://apis.io/finops/gelato/gelato-finops/)
 
-#### Properties
+## Where to find this API
 
-- [Documentation](https://dashboard.gelato.com/docs/products/prices/)
-- [API Reference](https://dashboard.gelato.com/docs/products/stock/region-availability/)
-- [OpenAPI](openapi/gelato-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/gelato.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/gelato.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-### Gelato Shipment API
-
-List the shipment methods Gelato provides - with type, tracking support, and supported countries - optionally filtered by destination country, via the v1 shipment endpoint under shipment.gelatoapis.com.
-
-- **Human URL:** [https://dashboard.gelato.com/docs/shipment/methods/](https://dashboard.gelato.com/docs/shipment/methods/)
-- **Base URL:** `https://shipment.gelatoapis.com`
-
-#### Tags
-
-- Shipment
-- Shipping Methods
-- Logistics
-
-#### Properties
-
-- [Documentation](https://dashboard.gelato.com/docs/shipment/methods/)
-- [API Reference](https://dashboard.gelato.com/docs/shipment/methods/)
-- [OpenAPI](openapi/gelato-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/gelato.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/gelato.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Gelato Ecommerce API
-
-Manage connected store products and templates - list and get store products, create products from a template, and retrieve template details - via the v1 ecommerce endpoints under ecommerce.gelatoapis.com.
-
-- **Human URL:** [https://dashboard.gelato.com/docs/ecommerce/products/list/](https://dashboard.gelato.com/docs/ecommerce/products/list/)
-- **Base URL:** `https://ecommerce.gelatoapis.com`
-
-#### Tags
-
-- Ecommerce
-- Stores
-- Templates
-
-#### Properties
-
-- [Documentation](https://dashboard.gelato.com/docs/ecommerce/products/list/)
-- [API Reference](https://dashboard.gelato.com/docs/ecommerce/products/create-from-template/)
-- [OpenAPI](openapi/gelato-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/gelato.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/gelato.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Gelato Webhooks API
-
-Subscribe to JSON event callbacks for order and store-product lifecycle changes - including order_status_updated, order_item_status_updated, and store_product_template_created/updated/deleted events posted to your endpoint URL.
-
-- **Human URL:** [https://dashboard.gelato.com/docs/webhooks/](https://dashboard.gelato.com/docs/webhooks/)
-- **Base URL:** `https://dashboard.gelato.com/docs`
-
-#### Tags
-
-- Webhooks
-- Events
-- Notifications
-
-#### Properties
-
-- [Documentation](https://dashboard.gelato.com/docs/webhooks/)
-- [API Reference](https://dashboard.gelato.com/docs/webhooks/)
-- [OpenAPI](openapi/gelato-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/gelato.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/gelato.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [LinkedIn](https://www.linkedin.com/company/gelato-com)
 - [Website](https://www.gelato.com)
 - [Documentation](https://dashboard.gelato.com/docs/)
-- [Plans](plans/gelato-plans-pricing.yml)
-- [Rate Limits](rate-limits/gelato-rate-limits.yml)
-- [Fin Ops](finops/gelato-finops.yml)
+- [Blog](https://www.gelato.com/news)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 27.1** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 48.1 |
+| Contract governance | 0.0 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 31.0 |
+| Access clarity | 7.9 |
+
+**Agent readiness 19.6** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 17.6** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/gelato/](https://apis.io/providers/gelato/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Gelato: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/gelato/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
